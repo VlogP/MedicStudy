@@ -17,6 +17,7 @@ namespace FinalItechArt
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             string con = "Server=WSE-110-71\\SQLEXPRESS;Database=Medic;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(con));
         }
@@ -27,12 +28,11 @@ namespace FinalItechArt
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+               
             }
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseMvc();
         }
     }
 }
