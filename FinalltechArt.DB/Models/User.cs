@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinalltechArt.DB.Models
 {
-    class User
+   public class User
     {
         public int UserId { get; set; }
         public string ClinicId { get; set; }

@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using FinalltechArt.DB.DBRepository;
 namespace FinalItechArt
 {
     public class Startup
@@ -15,6 +17,8 @@ namespace FinalItechArt
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            string con = "Server=WSE-110-71\\SQLEXPRESS;Database=Medic;Trusted_Connection=True;MultipleActiveResultSets=true";
+            services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(con));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
