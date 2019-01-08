@@ -18,6 +18,7 @@ namespace FinalItechArt.Web.Controllers
         public TestController(RepositoryContext context)
         {
             db = context;
+            
         }
 
         [HttpGet]
