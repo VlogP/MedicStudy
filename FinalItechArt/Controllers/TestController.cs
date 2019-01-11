@@ -12,7 +12,7 @@ namespace FinalItechArt.Web.Controllers
 {
     [Route("Test")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class TestController : Controller
     {
         private RepositoryContext db;
         public TestController(RepositoryContext context)
@@ -20,11 +20,14 @@ namespace FinalItechArt.Web.Controllers
             db = context;
             
         }
-
+        
         [HttpGet]
-        public IEnumerable<Clinic> Get()
+        public IActionResult Get()
         {
-            return db.Clinics.ToList();
+
+
+
+            return Ok(db.Set<Clinic>().ToList());
         }
 
 
