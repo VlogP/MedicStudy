@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using FinalltechArt.DB.DBRepository;
 using FinalltechArt.DB.Models;
+
 namespace FinalItechArt.Web.Controllers
 {
     [Route("Test")]
@@ -21,13 +22,13 @@ namespace FinalItechArt.Web.Controllers
             
         }
         
-        [HttpGet]
-        public IActionResult Get()
+        [HttpPost]
+        public IActionResult Get([FromBody]Visit NewVisit)
         {
 
-
-
-            return Ok(db.Set<Clinic>().ToList());
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            db.Clinics.ToList();
+            return Ok(NewVisit);
         }
 
 
