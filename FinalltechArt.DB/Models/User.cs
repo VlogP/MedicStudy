@@ -24,6 +24,7 @@ namespace FinalltechArt.DB.Models
         [Required(ErrorMessage = "Doesn't set the email")]
         [EmailAddress(ErrorMessage = "Wrong Email view")]
         public string Email { get; set; }
+        public string Sault { get; set; }
         public int Role { get; set; }
         [Required(ErrorMessage = "Doesn't set the password")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$", ErrorMessage = "Wrong password view")]

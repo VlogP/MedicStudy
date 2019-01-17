@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using FinalltechArt.DB.Interfaces;
 
 namespace FinalltechArt.DB.DBRepository
 {
 
-   public class BaseRepository<T>
+   public class BaseRepository<T>:IBaseRepository<T>
         where T:class,new()
     {
         protected RepositoryContext basecontext;

@@ -8,3 +8,9 @@ FinalltechArt.DB/bin/
 FinalltechArt.DB/obj/
 FinalltechArt.DB/Properties/
 .vs/
+FinalltechArt.Service/bin/
+FinalltechArt.Service/obj/
+FinalltechArt.Service/FinalltechArt.Service.csproj
+DataTransferObject/DataTransferObject.csproj
+DataTransferObject/bin/
+DataTransferObject/obj/
