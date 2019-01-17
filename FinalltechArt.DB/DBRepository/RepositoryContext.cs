@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using FinalltechArt.DB.Models;
+
 namespace FinalltechArt.DB.DBRepository
 {
     public class RepositoryContext: DbContext

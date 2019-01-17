@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using FinalltechArt.DB.DBRepository;
+using FinalItechArt.Web.Models;
+using FinalltechArt.Service.Services;
+using FinalltechArt.Service.Interfaces;
 using FinalltechArt.DB.Models;
 using FinalltechArt.DB.Interfaces;
 
@@ -14,48 +14,47 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using FinalItechArt.Web.Infrastructure;
-using FinalltechArt.Service.Interfaces;
-
+using DataTransferObject;
 
 namespace FinalItechArt.Web.Controllers
 {
-    [Route("Test")]
+    [Route("auth")]
     [ApiController]
-    public class TestController : Controller
+    public class AuthController : Controller
     {
-        private IRegisterService db;
-        public TestController(IRegisterService context)
+        IAuthService AuthService;
+        public AuthController(IAuthService _AuthService)
         {
-
-            db = context;
-            
-        }
-      
-        [HttpPost]      
-        public IActionResult Post([FromBody]Visit NewVisit)
-        {
-
-           // if (!ModelState.IsValid) return BadRequest(ModelState);
-           // db.Clinics.ToList();
-
-            return Ok(NewVisit);
-        }
-        [HttpGet]
-        public IActionResult Get()
-        {
-         
-            return Ok();
+            AuthService = _AuthService;
         }
 
-        [Route("Test1")]
-        [HttpGet]
-        public IActionResult Get1()
+
+
+        [HttpPost]
+        public IActionResult Auth([FromBody]AuthViewModel AuthModel)
         {
+            var user = AuthService.GetIdentity(AuthModel.Email, AuthModel.Password);
+
+            if(user==null) return BadRequest("No");
+
+            return Ok(GetToken(user.Email, user.Role));
+        }
+
+
+
+
+
+
+
+        public string GetToken(string email,int role)
+        {
+           
+            DataObject.Role Myrole = (DataObject.Role)role;
 
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, "alex"),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, "admin")
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, email),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, Myrole.ToString())
                 };
 
             ClaimsIdentity claimsIdentity =
@@ -73,7 +72,7 @@ namespace FinalItechArt.Web.Controllers
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            return Ok(encodedJwt);
+            return encodedJwt;
         }
 
 
