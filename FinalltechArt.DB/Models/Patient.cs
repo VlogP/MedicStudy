@@ -22,10 +22,10 @@ namespace FinalltechArt.DB.Models
         [RegularExpression(@"([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})", ErrorMessage = "Wrong birthdate view")]
         public string BirthDate { get; set; }
         [Required(ErrorMessage = "Doesn't set the gender")]
-        public int Gender { get; set; }
+        public string Gender { get; set; }
         [Required(ErrorMessage = "Doesn't set the status")]
-        public int Status { get; set; }
-        [Required(ErrorMessage = "Doesn't set the drugtype")]
-        public int DrugType { get; set; }
+        public string Status { get; set; }
+        
+        public List<Visit> Visits { get; set; }
     }
 }

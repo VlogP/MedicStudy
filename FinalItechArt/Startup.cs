@@ -63,9 +63,15 @@ namespace FinalItechArt
             string con = "Server=WSE-110-71\\SQLEXPRESS;Database=Medic;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(con));
 
+            services.AddScoped<IDrugRepository, DrugRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IClinicRepository, ClinicRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICabinetService, CabinetService>();
+            services.AddScoped<IDrugUnitService, DrugUnitService>();
+            services.AddScoped<IPatientService, PatientService>();
             services.AddSingleton(mapper);
         }
 
@@ -77,8 +83,7 @@ namespace FinalItechArt
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-               
+                app.UseDeveloperExceptionPage();               
             }
           
             app.UseDefaultFiles();

@@ -12,7 +12,7 @@ namespace FinalltechArt.DB.Migrations
                 columns: table => new
                 {
                     ClinicId = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,23 +33,6 @@ namespace FinalltechArt.DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DrugUnits",
-                columns: table => new
-                {
-                    DrugUnitId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DrugType = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Manufacturer = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    ClinicId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DrugUnits", x => x.DrugUnitId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Genders",
                 columns: table => new
                 {
@@ -67,13 +50,12 @@ namespace FinalltechArt.DB.Migrations
                 columns: table => new
                 {
                     PatientId = table.Column<string>(nullable: false),
-                    Firstname = table.Column<string>(nullable: true),
-                    Lastname = table.Column<string>(nullable: true),
-                    ClinicId = table.Column<string>(nullable: true),
-                    BirthDate = table.Column<string>(nullable: true),
-                    Gender = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
-                    DrugType = table.Column<int>(nullable: false)
+                    Firstname = table.Column<string>(nullable: false),
+                    Lastname = table.Column<string>(nullable: false),
+                    ClinicId = table.Column<string>(nullable: false),
+                    BirthDate = table.Column<string>(nullable: false),
+                    Gender = table.Column<string>(nullable: false),
+                    Status = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,11 +95,13 @@ namespace FinalltechArt.DB.Migrations
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClinicId = table.Column<string>(nullable: true),
-                    Firstname = table.Column<string>(nullable: true),
-                    Lastname = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
+                    Firstname = table.Column<string>(nullable: false),
+                    Lastname = table.Column<string>(nullable: false),
+                    Initials = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Sault = table.Column<string>(nullable: true),
                     Role = table.Column<int>(nullable: false),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,14 +114,55 @@ namespace FinalltechArt.DB.Migrations
                 {
                     VisitId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    VisitDate = table.Column<string>(nullable: true),
-                    PatientId = table.Column<string>(nullable: true),
-                    DrugUnitId = table.Column<int>(nullable: false)
+                    VisitDate = table.Column<string>(nullable: false),
+                    PatientId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Visits", x => x.VisitId);
+                    table.ForeignKey(
+                        name: "FK_Visits_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "PatientId",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "DrugUnits",
+                columns: table => new
+                {
+                    DrugUnitId = table.Column<string>(nullable: false),
+                    DrugType = table.Column<string>(nullable: false),
+                    TypeCapacity = table.Column<string>(nullable: false),
+                    Capacity = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Manufacturer = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    ClinicId = table.Column<string>(nullable: true),
+                    VisitId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DrugUnits", x => x.DrugUnitId);
+                    table.ForeignKey(
+                        name: "FK_DrugUnits_Visits_VisitId",
+                        column: x => x.VisitId,
+                        principalTable: "Visits",
+                        principalColumn: "VisitId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DrugUnits_VisitId",
+                table: "DrugUnits",
+                column: "VisitId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Visits_PatientId",
+                table: "Visits",
+                column: "PatientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -155,9 +180,6 @@ namespace FinalltechArt.DB.Migrations
                 name: "Genders");
 
             migrationBuilder.DropTable(
-                name: "Patients");
-
-            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
@@ -168,6 +190,9 @@ namespace FinalltechArt.DB.Migrations
 
             migrationBuilder.DropTable(
                 name: "Visits");
+
+            migrationBuilder.DropTable(
+                name: "Patients");
         }
     }
 }

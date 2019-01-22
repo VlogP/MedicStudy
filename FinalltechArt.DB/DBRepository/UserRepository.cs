@@ -15,9 +15,14 @@ namespace FinalltechArt.DB.DBRepository
             var user = basecontext.Users.FirstOrDefault(x=>x.Email==email);
             return  user == null;
         }
-        public User FindUser(string email)
+        public User FindUserByEmail(string email)
         {
             return basecontext.Users.FirstOrDefault(x => x.Email == email);
+
+        }
+        public User FindUserById(int Id)
+        {
+            return basecontext.Users.FirstOrDefault(x => x.UserId == Id);
 
         }
 

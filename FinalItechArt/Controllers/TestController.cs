@@ -23,11 +23,12 @@ namespace FinalItechArt.Web.Controllers
     [ApiController]
     public class TestController : Controller
     {
+        private IPatientRepository myrep;
         private IRegisterService db;
-        public TestController(IRegisterService context)
+        public TestController(IRegisterService context,IPatientRepository myrep)
         {
-
-            db = context;
+           this.myrep = myrep;
+           db = context;
             
         }
       
@@ -39,13 +40,16 @@ namespace FinalItechArt.Web.Controllers
            // db.Clinics.ToList();
 
             return Ok(NewVisit);
-        }
+       }
+      
+
         [HttpGet]
         public IActionResult Get()
         {
-         
-            return Ok();
+            var x = myrep.GetAllResearcher("1111");
+            return  Ok(x);
         }
+
 
         [Route("Test1")]
         [HttpGet]

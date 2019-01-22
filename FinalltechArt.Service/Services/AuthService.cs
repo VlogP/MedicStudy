@@ -14,7 +14,7 @@ namespace FinalltechArt.Service.Services
         public AuthService(RepositoryContext context) { UserRep = new UserRepository(context); }
         public User GetIdentity(string email, string paswword) {
 
-            User AuthUser = UserRep.FindUser(email);
+            User AuthUser = UserRep.FindUserByEmail(email);
             if (AuthUser != null)
                 if (!SaltHash.Verify(AuthUser.Sault, AuthUser.Password, paswword)) return null;
           

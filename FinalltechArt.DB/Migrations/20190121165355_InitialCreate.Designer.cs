@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalltechArt.DB.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20190102140730_InitialCreate")]
+    [Migration("20190121165355_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,8 @@ namespace FinalltechArt.DB.Migrations
                     b.Property<string>("ClinicId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ClinicId");
 
@@ -47,21 +48,35 @@ namespace FinalltechArt.DB.Migrations
 
             modelBuilder.Entity("FinalltechArt.DB.Models.DrugUnit", b =>
                 {
-                    b.Property<int>("DrugUnitId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("DrugUnitId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Capacity")
+                        .IsRequired();
 
                     b.Property<string>("ClinicId");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<int>("DrugType");
+                    b.Property<string>("DrugType")
+                        .IsRequired();
 
-                    b.Property<string>("Manufacturer");
+                    b.Property<string>("Manufacturer")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("TypeCapacity")
+                        .IsRequired();
+
+                    b.Property<int>("VisitId");
 
                     b.HasKey("DrugUnitId");
+
+                    b.HasIndex("VisitId")
+                        .IsUnique();
 
                     b.ToTable("DrugUnits");
                 });
@@ -84,19 +99,23 @@ namespace FinalltechArt.DB.Migrations
                     b.Property<string>("PatientId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BirthDate");
+                    b.Property<string>("BirthDate")
+                        .IsRequired();
 
-                    b.Property<string>("ClinicId");
+                    b.Property<string>("ClinicId")
+                        .IsRequired();
 
-                    b.Property<int>("DrugType");
+                    b.Property<string>("Firstname")
+                        .IsRequired();
 
-                    b.Property<string>("Firstname");
+                    b.Property<string>("Gender")
+                        .IsRequired();
 
-                    b.Property<int>("Gender");
+                    b.Property<string>("Lastname")
+                        .IsRequired();
 
-                    b.Property<string>("Lastname");
-
-                    b.Property<int>("Status");
+                    b.Property<string>("Status")
+                        .IsRequired();
 
                     b.HasKey("PatientId");
 
@@ -137,15 +156,24 @@ namespace FinalltechArt.DB.Migrations
 
                     b.Property<string>("ClinicId");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("Firstname");
+                    b.Property<string>("Firstname")
+                        .IsRequired();
 
-                    b.Property<string>("Lastname");
+                    b.Property<string>("Initials")
+                        .IsRequired();
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Lastname")
+                        .IsRequired();
+
+                    b.Property<string>("Password")
+                        .IsRequired();
 
                     b.Property<int>("Role");
+
+                    b.Property<string>("Sault");
 
                     b.HasKey("UserId");
 
@@ -158,15 +186,33 @@ namespace FinalltechArt.DB.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DrugUnitId");
+                    b.Property<string>("PatientId")
+                        .IsRequired();
 
-                    b.Property<string>("PatientId");
-
-                    b.Property<string>("VisitDate");
+                    b.Property<string>("VisitDate")
+                        .IsRequired();
 
                     b.HasKey("VisitId");
 
+                    b.HasIndex("PatientId");
+
                     b.ToTable("Visits");
+                });
+
+            modelBuilder.Entity("FinalltechArt.DB.Models.DrugUnit", b =>
+                {
+                    b.HasOne("FinalltechArt.DB.Models.Visit", "Visit")
+                        .WithOne("DrugUnit")
+                        .HasForeignKey("FinalltechArt.DB.Models.DrugUnit", "VisitId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("FinalltechArt.DB.Models.Visit", b =>
+                {
+                    b.HasOne("FinalltechArt.DB.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

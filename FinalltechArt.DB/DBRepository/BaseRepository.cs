@@ -20,6 +20,7 @@ namespace FinalltechArt.DB.DBRepository
         public virtual IEnumerable<T> GetAll()
         {
             return basecontext.Set<T>().ToList();
+           
         }
 
         public virtual int Count()

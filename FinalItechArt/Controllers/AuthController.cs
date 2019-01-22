@@ -29,32 +29,28 @@ namespace FinalItechArt.Web.Controllers
         }
 
 
-
+        
         [HttpPost]
         public IActionResult Auth([FromBody]AuthViewModel AuthModel)
         {
             var user = AuthService.GetIdentity(AuthModel.Email, AuthModel.Password);
-
+           
             if(user==null) return BadRequest("No");
-
-            return Ok(GetToken(user.Email, user.Role));
+            
+            return Ok(new AuthAnswer
+            { token = GetToken(user.UserId, user.Role),
+              role = ((DataObject.Role)user.Role).ToString()
+            });
         }
 
 
-
-
-
-
-
-        public string GetToken(string email,int role)
+        public string GetToken(int id,int role)
         {
            
-            DataObject.Role Myrole = (DataObject.Role)role;
-
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, email),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, Myrole.ToString())
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, id.ToString()),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType,((DataObject.Role)role).ToString())
                 };
 
             ClaimsIdentity claimsIdentity =

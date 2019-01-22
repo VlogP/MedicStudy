@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FinalItechArt.Web.Models;
 using FinalltechArt.DB.Models;
+using DataTransferObject;
 
 namespace FinalItechArt.Web.Infrastructure
 {
@@ -13,6 +14,8 @@ namespace FinalItechArt.Web.Infrastructure
         public AutoMapperProfile()
         {
             CreateMap<RegisterViewModel, User>();
+            CreateMap<User, UserDTO>();
+            CreateMap<DrugDTO, DrugUnit>();
         }
 
 
