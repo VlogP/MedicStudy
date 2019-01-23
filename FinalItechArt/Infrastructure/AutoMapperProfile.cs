@@ -16,6 +16,7 @@ namespace FinalItechArt.Web.Infrastructure
             CreateMap<RegisterViewModel, User>();
             CreateMap<User, UserDTO>();
             CreateMap<DrugDTO, DrugUnit>();
+            CreateMap<PatientAddViewModel, Patient>();
         }
 
 

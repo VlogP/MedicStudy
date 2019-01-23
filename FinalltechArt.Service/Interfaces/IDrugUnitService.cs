@@ -13,7 +13,8 @@ namespace FinalltechArt.Service.Interfaces
         void Add(DrugUnit Drug);
         bool Check(string DrugId);
         void CountDrugTypes(DataCountDrugType Variable);
-        void SendDrugs(DataCountDrugType Variable);
+        void SendDrugs(DataCountDrugType Variable);       
         IEnumerable<Clinic> GetClinics();
+        
     }
 }

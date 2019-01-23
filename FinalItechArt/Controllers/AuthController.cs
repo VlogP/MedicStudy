@@ -43,7 +43,7 @@ namespace FinalItechArt.Web.Controllers
             });
         }
 
-
+        [NonAction]
         public string GetToken(int id,int role)
         {
            

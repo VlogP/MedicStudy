@@ -7,7 +7,7 @@ using FinalltechArt.DB.Interfaces;
 using System.Linq;
 using DataTransferObject;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace FinalltechArt.DB.DBRepository
 {
@@ -25,11 +25,13 @@ namespace FinalltechArt.DB.DBRepository
             {
                 string ListDrugs="";
                 foreach(var drugitem in item.Visits)
-                {                   
-                    ListDrugs +=drugitem.DrugUnit?.Name+",";
+                {           
+                    if(drugitem.DrugUnit!=null)
+                    ListDrugs +=drugitem.DrugUnit.Name+",";
                 }
                 string Lastvisit = item.Visits.LastOrDefault()?.VisitDate;
              
+
                 ListDrugs =ListDrugs.Remove(ListDrugs.Count()-1);
               
                 patienttable.Add(new PatientTableViewDTO {BirthDate= item.BirthDate,ClinicId=item.ClinicId,PatientId=item.PatientId,VisitLast=Lastvisit,UsedDrugs=ListDrugs }) ;
@@ -61,7 +63,58 @@ namespace FinalltechArt.DB.DBRepository
             return patienttable;
 
         }
-       
+        public bool Check(string IdPatient)
+        {
+
+            var patient = basecontext.Patients.FirstOrDefault(x => x.PatientId == IdPatient);
+
+            return patient==null;
+
+        }
+        public Patient CheckStatus(string IdPatient)
+        {
+
+            var patient = basecontext.Patients.FirstOrDefault(x => x.PatientId == IdPatient);
+
+            return patient;
+
+        }
+
+        public PatientDTO GetFullInfoOne(string Id)
+        {
+
+            PatientDTO patient = basecontext.Patients.Where(x => x.PatientId == Id).Select(x=>new PatientDTO
+            {
+                BirthDate = x.BirthDate,
+                Firstname = x.Firstname,
+                Gender = x.Gender,
+                Lastname = x.Lastname,
+                Status = x.Status,
+                VisitDTO = new List<VisitDTOInfoViewOne>()
+            }).FirstOrDefault();
+
+
+            if (patient != null)
+            {
+                patient.VisitDTO = basecontext.Visits.Where(v=>v.PatientId==Id).Join(basecontext.DrugUnits, v => v.VisitId, d => d.VisitId, (v, d) => new VisitDTOInfoViewOne
+                {
+                    VisitDate = v.VisitDate,
+                    DrugUnit = new DrugDTOInfoViewOne
+                    {
+                        Name = d.Name,
+                        Capacity = d.Capacity,
+                        Description = d.Description,
+                        DrugType = d.DrugType,
+                        Manufacturer = d.Manufacturer,
+                        TypeCapacity = d.TypeCapacity
+                    }
+                }).ToList();
+            }
+
+            return patient;
+
+        }
+
 
 
     }

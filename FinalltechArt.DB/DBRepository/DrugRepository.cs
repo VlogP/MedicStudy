@@ -59,6 +59,13 @@ namespace FinalltechArt.DB.DBRepository
             Variable.CountTypeB = basecontext.DrugUnits.Where(x => x.DrugType == "B").Where(x => x.ClinicId == null).Count();
             Variable.CountTypeC = basecontext.DrugUnits.Where(x => x.DrugType == "C").Where(x => x.ClinicId == null).Count();
         }
+        public void CountDrugTypesInClinic(DataCountDrugType Variable)
+        {
+            Variable.CountTypeA = basecontext.DrugUnits.Where(x => x.DrugType == "A"&&x.VisitId==null).Where(x => x.ClinicId == Variable.ClinicId).Count();
+            Variable.CountTypeB = basecontext.DrugUnits.Where(x => x.DrugType == "B"&& x.VisitId == null).Where(x => x.ClinicId == Variable.ClinicId).Count();
+            Variable.CountTypeC = basecontext.DrugUnits.Where(x => x.DrugType == "C"&& x.VisitId == null).Where(x => x.ClinicId == Variable.ClinicId).Count();
+            
+        }
 
         public bool Check(string DrugId)
         {
@@ -73,14 +80,35 @@ namespace FinalltechArt.DB.DBRepository
             IEnumerable<DrugUnit>MyUnits= basecontext.DrugUnits.Where(x => x.DrugType == "A").Take(Variable.CountTypeA).ToList();
             foreach (var item in MyUnits)
                 item.ClinicId = Variable.ClinicId;
-            MyUnits=basecontext.DrugUnits.Where(x => x.DrugType == "B").Take(Variable.CountTypeB).ToList();
+            MyUnits=basecontext.DrugUnits.Where(x => x.DrugType == "B" ).Take(Variable.CountTypeB).ToList();
             foreach (var item in MyUnits)
                 item.ClinicId = Variable.ClinicId;
-            MyUnits=basecontext.DrugUnits.Where(x => x.DrugType == "C").Take(Variable.CountTypeC).ToList();
+            MyUnits=basecontext.DrugUnits.Where(x => x.DrugType == "C" ).Take(Variable.CountTypeC).ToList();
             foreach (var item in MyUnits)
                 item.ClinicId = Variable.ClinicId;
+
           
         }
+
+       public void TakeDrugToVisit(DataCountDrugType Variable,int VisitId)
+        {
+            IEnumerable<DrugUnit> MyUnits = basecontext.DrugUnits.Where(x => x.DrugType == "A"&&x.VisitId==null).ToList();
+
+          
+            if(Variable.CountTypeA!=0)
+                   MyUnits.ElementAt(new Random().Next(0, MyUnits.Count())).VisitId=VisitId;    
+          
+            MyUnits = basecontext.DrugUnits.Where(x => x.DrugType == "B" && x.VisitId == null).ToList();
+          
+            if (Variable.CountTypeB != 0)
+                MyUnits.ElementAt(new Random().Next(0, MyUnits.Count())).VisitId = VisitId;
+
+            MyUnits = basecontext.DrugUnits.Where(x => x.DrugType == "C" && x.VisitId == null).ToList();
+
+            if (Variable.CountTypeC != 0)
+                MyUnits.ElementAt(new Random().Next(0, MyUnits.Count())).VisitId = VisitId;
+        }
+
 
     }
 }

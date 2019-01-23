@@ -67,6 +67,7 @@ namespace FinalItechArt
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IClinicRepository, ClinicRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IVisitRepository, VisitRepository>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICabinetService, CabinetService>();

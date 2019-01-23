@@ -11,6 +11,8 @@ namespace FinalltechArt.DB.Interfaces
     {
         IEnumerable<PatientTableViewDTO> GetAllSponsor();
         IEnumerable<PatientTableViewDTO> GetAllResearcher(string IdClinic);
-       
+        bool Check(string IdPatient);
+        PatientDTO GetFullInfoOne(string Id);
+        Patient CheckStatus(string IdPatient);
     }
 }

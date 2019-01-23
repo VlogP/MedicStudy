@@ -12,6 +12,8 @@ namespace DataTransferObject
         public string BirthDate { get; set; }      
         public string VisitLast { get; set; }
         public string UsedDrugs { get; set; }
+       
+       
 
     }
 }

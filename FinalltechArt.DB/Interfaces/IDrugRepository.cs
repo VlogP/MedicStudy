@@ -12,6 +12,8 @@ namespace FinalltechArt.DB.Interfaces
         IEnumerable<DrugUnit> Sort(int SelectedSort);
         bool Check(string DrugId);
         void CountDrugTypes(DataCountDrugType Variable);
+        void CountDrugTypesInClinic(DataCountDrugType Variable);
         void SendDrugs(DataCountDrugType Variable);
+        void TakeDrugToVisit(DataCountDrugType Variable, int VisitId);
     }
 }

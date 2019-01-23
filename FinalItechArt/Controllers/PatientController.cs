@@ -11,6 +11,9 @@ using FinalItechArt.Web.Infrastructure;
 using FinalltechArt.Service.Interfaces;
 using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+using FinalItechArt.Web.Models;
+using FinalltechArt.DB.Models;
 
 namespace FinalItechArt.Web.Controllers
 {
@@ -19,10 +22,11 @@ namespace FinalItechArt.Web.Controllers
     public class PatientController : Controller
     {
         private IPatientService myrep;
-      
-        public PatientController( IPatientService myrep)
+        private IMapper mapper;
+        public PatientController( IPatientService myrep,IMapper mapper)
         {
-            this.myrep = myrep;          
+            this.myrep = myrep;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -39,6 +43,36 @@ namespace FinalItechArt.Web.Controllers
             string UserId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
             return Ok(myrep.GetAllResearcherPatients(Int32.Parse(UserId)));
         }
+
+        [HttpPost]
+        public IActionResult AddPatient([FromBody]PatientAddViewModel patient)
+        {
+            string UserId = "1"; //User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
+
+            if (!myrep.AddPatient(mapper.Map<Patient>(patient), Int32.Parse(UserId))) return BadRequest();
+
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetFullInfoAboutOne(string id)
+        {          
+            return Ok(myrep.GetFullInfoOne(id));
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult RegisterNewVisit(string id)
+        {
+           
+
+            string UserId = "1"; //User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
+
+            if (!myrep.RegisterNewVisit(id,Int32.Parse(UserId))) return BadRequest();
+
+            return Ok();
+        }
+
+
 
     }
 }
