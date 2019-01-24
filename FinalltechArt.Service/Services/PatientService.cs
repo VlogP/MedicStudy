@@ -55,7 +55,19 @@ namespace FinalltechArt.Service.Services
             return PatientRep.GetFullInfoOne(Id);
         }
 
-       public bool RegisterNewVisit(string Id,int ResearcherId)
+        public bool NotFullCompleteResearch(string Id)
+        {
+            Patient patient = PatientRep.CheckStatus(Id);
+            if (patient?.Status == "Not full end" || patient?.Status == "Full end")
+                return false;
+
+            patient.Status = "Not full end";
+            PatientRep.Save();
+
+            return true;
+        }
+
+        public bool RegisterNewVisit(string Id,int ResearcherId)
         {
             Patient patient = PatientRep.CheckStatus(Id);
             

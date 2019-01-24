@@ -72,6 +72,15 @@ namespace FinalItechArt.Web.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}")]
+        public IActionResult NotFullCompleteResearch(string id)
+        {
+
+
+            if (!myrep.NotFullCompleteResearch(id)) return BadRequest();
+
+            return Ok();
+        }
 
 
     }

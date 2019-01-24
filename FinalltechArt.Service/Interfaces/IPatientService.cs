@@ -13,5 +13,6 @@ namespace FinalltechArt.Service.Interfaces
         bool AddPatient(Patient patient, int ResearcherId);
         PatientDTO GetFullInfoOne(string Id);
         bool RegisterNewVisit(string Id,int ResearcherId);
+        bool NotFullCompleteResearch(string Id);
     }
 }
