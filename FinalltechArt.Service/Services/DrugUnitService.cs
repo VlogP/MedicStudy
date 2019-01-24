@@ -31,6 +31,7 @@ namespace FinalltechArt.Service.Services
         }
         public bool Check(string DrugId)
         {
+         
             return DrugRep.Check(DrugId);
         }
 
@@ -51,6 +52,11 @@ namespace FinalltechArt.Service.Services
 
             return ClinicRep.GetAll();
         }
+        public void Delete(string DrugId)
+        {
+            DrugRep.Delete(DrugId);
+            DrugRep.Save();
 
+        }
     }
 }

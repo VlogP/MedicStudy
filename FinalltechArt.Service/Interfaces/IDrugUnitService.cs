@@ -15,6 +15,6 @@ namespace FinalltechArt.Service.Interfaces
         void CountDrugTypes(DataCountDrugType Variable);
         void SendDrugs(DataCountDrugType Variable);       
         IEnumerable<Clinic> GetClinics();
-        
+        void Delete(string DrugId);
     }
 }

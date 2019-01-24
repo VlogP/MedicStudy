@@ -39,9 +39,23 @@ namespace FinalItechArt.Web.Controllers
         [HttpPost]
         public IActionResult AddDrug([FromBody]DrugDTO NewDrug)
         {
+            
             if (!DrugService.Check(NewDrug.DrugUnitId)) return BadRequest();
 
             DrugService.Add(Mapper.Map<DrugUnit>(NewDrug));
+            return Ok();
+
+        }
+
+       
+        [HttpPost]
+        [Route("delete/")]
+        public IActionResult DeleteDrug([FromBody]DrugDTO NewDrug)
+        {
+        
+            if (DrugService.Check(NewDrug.DrugUnitId)) return BadRequest();
+
+            DrugService.Delete(NewDrug.DrugUnitId);
             return Ok();
 
         }

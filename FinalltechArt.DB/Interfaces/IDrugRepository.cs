@@ -15,5 +15,6 @@ namespace FinalltechArt.DB.Interfaces
         void CountDrugTypesInClinic(DataCountDrugType Variable);
         void SendDrugs(DataCountDrugType Variable);
         void TakeDrugToVisit(DataCountDrugType Variable, int VisitId);
+        void Delete(string DrugId);
     }
 }

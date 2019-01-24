@@ -74,7 +74,15 @@ namespace FinalltechArt.DB.DBRepository
                   
             return element == null;
         }
-       public void SendDrugs(DataCountDrugType Variable)
+        public void Delete(string DrugId)
+        {
+
+            var element = basecontext.DrugUnits.FirstOrDefault(x => x.DrugUnitId == DrugId);
+            
+            basecontext.DrugUnits.Remove(element);
+            
+        }
+        public void SendDrugs(DataCountDrugType Variable)
         {
             
             IEnumerable<DrugUnit>MyUnits= basecontext.DrugUnits.Where(x => x.DrugType == "A").Take(Variable.CountTypeA).ToList();
