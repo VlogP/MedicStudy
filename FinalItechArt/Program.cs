@@ -12,6 +12,8 @@ namespace FinalItechArt
 {
     public class Program
     {
+        public object CDE { get; set; }
+
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
