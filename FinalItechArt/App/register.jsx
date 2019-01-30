@@ -1,6 +1,5 @@
 import React from 'react';
-
-import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 
 
@@ -16,7 +15,7 @@ export class Header extends React.Component {
 
 
 
-export default class Hello extends React.Component {
+export   class Hello extends React.Component {
 
     constructor(props) {
 
@@ -134,6 +133,74 @@ export class Clock extends React.Component {
 
 }
 
+
+
+
+export default class UserForm extends React.Component {
+    constructor(props) {
+      super(props);
+      var name = props.name;
+      var nameIsValid = this.validateName(name);
+      var age = props.age;
+      var ageIsValid = this.validateAge(age);
+      this.state = {name: name, age: age, nameValid: nameIsValid, ageValid: ageIsValid};
+ 
+      this.onNameChange = this.onNameChange.bind(this);
+      this.onAgeChange = this.onAgeChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+      validateAge(age){
+        var myRe = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[!-+.@#$%^&*]).{8,15}$/;
+        var myArray = myRe.test(age);
+          return myArray;
+      }
+      validateName(name){
+          return name.length>2;
+      }
+      onAgeChange(e) {
+          var val = e.target.value;
+          var valid = this.validateAge(val);
+          this.setState({age: val, ageValid: valid});
+      }
+      onNameChange(e) {
+          var val = e.target.value;
+          console.log(val);
+          var valid = this.validateName(val);
+          this.setState({name: val, nameValid: valid});
+      }
+ 
+      handleSubmit(e) {
+          e.preventDefault();
+          if(this.state.nameValid ===true && this.state.ageValid===true){
+              alert("Имя: " + this.state.name + " Возраст: " + this.state.age);
+          }
+
+          axios.post()
+      }
+ 
+      render() {
+          // цвет границы для поля для ввода имени
+          var nameColor = this.state.nameValid===true?"green":"red";
+          // цвет границы для поля для ввода возраста
+          var ageColor = this.state.ageValid===true?"green":"red";
+          return (
+              <form onSubmit={this.handleSubmit}>
+                  <p>
+                      <label>Имя:</label><br />
+                      <input type="text" value={this.state.name} 
+                          onChange={this.onNameChange} style={{borderColor:nameColor}} />
+                  </p>
+                  <p>
+                      <label>Возраст:</label><br />
+                      <input type="text" value={this.state.age} 
+                          onChange={this.onAgeChange}  style={{borderColor:ageColor}} />
+                  </p>
+                  <input type="submit" value="Отправить" />
+              </form>
+          );
+      }
+  }
+  UserForm.defaultProps = { name:"", age:"0" };
 
 
 
