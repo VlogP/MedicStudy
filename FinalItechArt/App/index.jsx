@@ -27,8 +27,6 @@ const reducer = (state = initialState, action) => {
       };
     case 'REQUESTED_DOG_FAILED':
       return {
-        url: '',
-        loading: false,
         error: true,
       };
     default:
@@ -71,19 +69,17 @@ function onNameChange(e) {
 }
 
 // Sagas
-function* watchFetchDog() {
-  yield takeEvery('FETCHED_DOG', PasswordAsync);
+function* watchFetchDog(e) {
+ 
+  yield takeEvery('FETCHED_DOG', PasswordAsync,e);
 
 }
 
-function* fetchDogAsync() {
+function* PasswordAsync(e) {
   try {
-    yield put(requestDog());
-    const data = yield call(() => {
-      return fetch('https://dog.ceo/api/breeds/image/random')
-              .then(res => res.json())
-      }
-    );
+    console.log(e);
+    const data = yield call(validateName(e.target.value));
+  
     yield put(requestDogSuccess(data));
   } catch (error) {
     yield put(requestDogError());
@@ -102,17 +98,14 @@ class App extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.props.fetchDog}>
+      <form >
       <p>
           <label>Имя:</label><br />
-          <input type="text" value={this.state.Name} 
-              onChange={this.onNameChange} style={{borderColor:nameColor}} />
+          <input type="text" value={this.props.Name} 
+              onChange={this.props.fetchDog} style={this.props.error ? {borderColor:"red"}:{borderColor:"green"}} />
       </p>
-      <p>
-          <label>Возраст:</label><br />
-          <input type="text" value={this.state.age} 
-              onChange={this.onAgeChange}  style={{borderColor:ageColor}} />
-      </p>
+      
+
       <input type="submit" value="Отправить" />
   </form>
     )
@@ -134,7 +127,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps =dispatch =>{
   return{
-  fetchDog: () => dispatch({ type: "FETCHED_DOG" })
+  fetchDog: (e) => dispatch({ type: "FETCHED_DOG", data:e })
   
   };
 };
