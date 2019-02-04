@@ -1,206 +1,380 @@
 import React from 'react';
+
+import{connect}from 'react-redux';
+
+import {put, call,takeEvery} from 'redux-saga/effects';
+
+import Button from '@material-ui/core/Button';
+
+import Paper from '@material-ui/core/Paper';
+
+import TextField from '@material-ui/core/TextField';
+
+import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 
 
 
-export class Header extends React.Component {
 
-    render() {
+// Reducer
 
-        return <h1>Header</h1>
+const initialState = {
 
-    }
+  FirstName:'',
 
-}
+  Lastname:'',
 
+  Initials:'',
 
+  Email:'',
 
-export   class Hello extends React.Component {
+  Password:'',
 
-    constructor(props) {
+  ConfirmPassword:'',
 
-        super(props);
+  errors:["","","","","","","",""]
 
-        this.state = { String: "ll", Increment: 0 };
+   
 
-        this.down = this.down.bind(this);
+};
 
-    }
+export const reducer = (state = initialState, action) => {
 
-    down() {
+  switch (action.type) { 
 
-        let letter = this.state.String === "l" ? "ll" : "l";
+    case 'REQUESTED_NAME':
 
+      return {
 
+        errors:action.errors
 
-        this.setState({ String: letter, Increment: this.state.Increment + 1 });
+      };
 
+    default:
 
+      return state;
 
-
-
-    };
-
-
-
-
-
-    render() {
-
-        return <div className="Hello">
-
-            <h2><Clock /></h2>
-
-            <h1>{this.props.String}</h1>
-
-            <h1>{this.state.Increment}</h1>
-
-            <button onClick={this.down}>{this.state.String}{this.state.Increment}</button></div>
-
-    }
-
-}
-
-Hello.defaultProps = { String: "Tom" };
-
-
-
-
-
-export class Clock extends React.Component {
-
-    constructor(props) {
-
-        super(props);
-
-        this.state = { date: new Date(), name: "Tom123", Increment: 0 };
-
-    }
-
-
-
-    componentDidMount() {
-
-        this.timerId = setInterval(
-
-            () => this.tick(),
-
-            1000
-
-        );
-
-    }
-
-
-
-    componentWillUnmount() {
-
-        clearInterval(this.timerId);
-
-    }
-
-
-
-    tick() {
-
-        this.setState({
-
-            date: new Date(),
-
-            Increment: this.state.Increment + 1
-
-        });
-
-    }
-
-
-
-    render() {
-
-        return (
-
-            <div>
-
-                <h1>Привет, {this.state.name},{this.state.Increment}</h1>
-
-                <h2>Текущее время {this.state.date.toLocaleTimeString()}.</h2>
-
-            </div>
-
-        );
-
-    }
-
-}
-
-
-
-
-export default class UserForm extends React.Component {
-    constructor(props) {
-      super(props);
-      var name = props.name;
-      var nameIsValid = this.validateName(name);
-      var age = props.age;
-      var ageIsValid = this.validateAge(age);
-      this.state = {name: name, age: age, nameValid: nameIsValid, ageValid: ageIsValid};
- 
-      this.onNameChange = this.onNameChange.bind(this);
-      this.onAgeChange = this.onAgeChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-      validateAge(age){
-        var myRe = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[!-+.@#$%^&*]).{8,15}$/;
-        var myArray = myRe.test(age);
-          return myArray;
-      }
-      validateName(name){
-          return name.length>2;
-      }
-      onAgeChange(e) {
-          var val = e.target.value;
-          var valid = this.validateAge(val);
-          this.setState({age: val, ageValid: valid});
-      }
-      onNameChange(e) {
-          var val = e.target.value;
-          console.log(val);
-          var valid = this.validateName(val);
-          this.setState({name: val, nameValid: valid});
-      }
- 
-      handleSubmit(e) {
-          e.preventDefault();
-          if(this.state.nameValid ===true && this.state.ageValid===true){
-              alert("Имя: " + this.state.name + " Возраст: " + this.state.age);
-          }
-
-          axios.post()
-      }
- 
-      render() {
-          // цвет границы для поля для ввода имени
-          var nameColor = this.state.nameValid===true?"green":"red";
-          // цвет границы для поля для ввода возраста
-          var ageColor = this.state.ageValid===true?"green":"red";
-          return (
-              <form onSubmit={this.handleSubmit}>
-                  <p>
-                      <label>Имя:</label><br />
-                      <input type="text" value={this.state.name} 
-                          onChange={this.onNameChange} style={{borderColor:nameColor}} />
-                  </p>
-                  <p>
-                      <label>Возраст:</label><br />
-                      <input type="text" value={this.state.age} 
-                          onChange={this.onAgeChange}  style={{borderColor:ageColor}} />
-                  </p>
-                  <input type="submit" value="Отправить" />
-              </form>
-          );
-      }
   }
-  UserForm.defaultProps = { name:"", age:"0" };
+
+};
 
 
 
+const requestDogSuccess = (data) => {
+
+	
+
+  return { type: 'REQUESTED_NAME', errors: data}
+
+};
+
+
+
+
+function validatePassword(e){
+
+	 var reqular = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*[!-+.@#$%^&*]).{8,16}$/;
+	
+    return reqular.test(e.Password);
+
+}
+
+function validateName(e){
+
+	 var reqular = /^[a-zA-Z]{3,}$/;
+
+	if(e.Name===undefined)return false;
+
+    return reqular.test(e.Name);
+
+}
+
+
+
+
+
+function validateInitials(e){
+
+	 var reqular = /^[A-Z][.][A-Z]$/;
+
+    return reqular.test(e.Initials);
+
+}
+
+function validateConfirmPassword(e){
+
+    return e.Password==e.ConfirmPassword;
+
+}
+
+function validateEmail(e){
+
+	var reqular = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return reqular.test(e.Email);
+}
+function RegisterRequest(e){
+
+    return axios.post('',{
+        Firstname:e.Info.FirstName,   
+        Lastname:e.Info.Lastname,   
+        Initials:e.Info.Initials,  
+        Email:e.Info.Email,
+        Password:e.Info.Password
+        })
+        .then(response=>{
+        return "";
+        })
+        .catch(error=>{
+        return "Error user with this Email already is";
+        });   
+	
+
+   
+}
+
+
+export function* watchFetchDog() {
+
+  yield takeEvery('VALIDATE', Validation);
+
+}
+
+
+
+function* Validation(e) {
+
+  try {
+
+    var errors=["","","","","","",""];
+    var IsReadyToSend=true;
+	
+
+    var IsOk = yield call(validatePassword,{Password:e.Password});
+
+	if(!IsOk){errors[4]="Password must be 8-16 characters and include both numbers";IsReadyToSend==false;}	
+
+	
+
+    IsOk = yield call(validateConfirmPassword,{Password:e.Password,ConfirmPassword:e.ConfirmPassword});
+
+	if(!IsOk){errors[5]="Not confirm password";IsReadyToSend=false;}
+
+	
+
+    IsOk = yield call(validateEmail,{Email:e.Email});
+
+	if(!IsOk){errors[3]="Not right email";IsReadyToSend=false;}		
+
+	
+
+	 IsOk = yield call(validateInitials,{Initials:e.Initials});
+
+	 if(!IsOk){errors[2]="Must be in form {A.A}";IsReadyToSend=false;}
+
+	
+
+	
+
+	 IsOk = yield call(validateName,{Name:e.FirstName});
+
+	
+
+	if(!IsOk){errors[0]="Consist only of letters";IsReadyToSend=false;	}
+
+	
+
+	 IsOk = yield call(validateName,{Name:e.Lastname});
+
+	if(!IsOk){errors[1]="Consist only of letters";IsReadyToSend=false;}	
+
+	
+    if(IsReadyToSend){
+    errors[6]=yield call(RegisterRequest,{Info:e});
+    }
+  
+    yield put(requestDogSuccess(errors));
+  } catch (error) {
+
+	console.log(error);
+
+  }
+
+}
+
+
+
+// Component
+
+class Register extends React.Component {
+
+constructor(props) {
+
+        super(props);
+
+         this.state={FirstName:props.FirstName,Lastname:props.Lastname,Initials:props.Initials,Email:props.Email,Password:props.Password,ConfirmPassword:props.ConfirmPassword};
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+		this.ChangeFirstName = this.ChangeFirstName.bind(this);
+
+		this.ChangeLastName = this.ChangeLastName.bind(this);
+
+		this.ChangeInitialsName = this.ChangeInitialsName.bind(this);
+
+		this.ChangeEmailName = this.ChangeEmailName.bind(this);
+
+		this.ChangePassword = this.ChangePassword.bind(this);
+
+		this.ChangeConfirmPassword = this.ChangeConfirmPassword.bind(this);
+
+      }
+
+	  ChangeFirstName(e){
+
+		  this.setState({FirstName:e.target.value});
+
+		
+
+	  }
+
+	  ChangeLastName(e){
+
+	  this.setState({Lastname:e.target.value});
+
+	  }
+
+	  ChangeInitialsName(e){
+
+		  this.setState({Initials:e.target.value});
+
+	  }
+
+	  ChangeEmailName(e){
+
+		  this.setState({Email:e.target.value});
+
+	  }
+
+	  ChangePassword(e){
+
+		this.setState({Password:e.target.value});
+
+	  }
+
+	  ChangeConfirmPassword(e){
+
+		  this.setState({ConfirmPassword:e.target.value});
+
+		  
+
+	  }
+
+	 
+
+	  
+
+	   handleSubmit(e) {
+
+        e.preventDefault();
+
+       this.props.Validate(this.state.FirstName,this.state.Lastname,this.state.Initials,this.state.Email,this.state.Password,this.state.ConfirmPassword);
+
+      }
+
+	  
+
+  render () {
+
+    return (
+
+	
+
+	<Paper className="paper" elevation={10} Component="div">
+
+      <form onSubmit={this.handleSubmit}>
+
+        <Typography variant="h5" component="h3">
+
+          REGISTRATION
+
+        </Typography>
+
+	  
+
+<ul>
+   
+
+<li>	 <TextField error={this.props.errors[0]==""?false:true}  label="Firstname"  margin="normal"  onChange={this.ChangeFirstName}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[0]} </Typography>
+<li>	 <TextField error={this.props.errors[1]==""?false:true} label="Lastname" margin="normal"  onChange={this.ChangeLastName}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[1]}  </Typography>
+<li>	 <TextField error={this.props.errors[2]==""?false:true} label="Initials" margin="normal"  onChange={this.ChangeInitialsName}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[2]}  </Typography>
+<li>	 <TextField error={this.props.errors[3]==""?false:true} label="Email" margin="normal"  onChange={this.ChangeEmailName}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[3]==""?this.props.errors[6]:this.props.errors[3]} </Typography>
+<li>	 <TextField error={this.props.errors[4]==""?false:true} label="Password" type="password" margin="normal"  onChange={this.ChangePassword}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[4]}  </Typography>
+<li>	 <TextField error={this.props.errors[5]==""?false:true} label="Confirm Password" type="password" margin="normal"  onChange={this.ChangeConfirmPassword}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[5]}  </Typography>
+<li>     <Button type="submit" className="formButton" variant="contained" fullWidth={true}>Register</Button></li>
+    
+</ul> 
+
+	 
+
+</form>
+
+  </Paper>
+
+
+
+    )
+
+  }
+
+}
+
+
+
+// Store
+
+
+
+
+
+
+
+
+
+const mapStateToProps = state => {
+
+  return {
+
+   
+
+    errors:state.errors
+
+  };
+
+};
+
+
+
+const mapDispatchToProps =dispatch =>{
+
+  return{
+
+  Validate: (FirstName,Lastname,Initials,Email,Password,ConfirmPassword) => dispatch({ type: "VALIDATE",FirstName:FirstName,Lastname:Lastname,Initials:Initials,Email:Email,Password:Password,ConfirmPassword:ConfirmPassword })
+
+  
+
+  };
+
+};
+
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register); 

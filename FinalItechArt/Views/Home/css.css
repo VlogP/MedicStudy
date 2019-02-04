@@ -37,7 +37,7 @@ ul {
 
 text-align:center;
 
-width:1000px;
+width:800px;
 
 margin:auto;
 
@@ -84,3 +84,16 @@ color:#AB47BC;
 	 text-decoration: none;
 }
 
+.ErrorsMessage li{
+
+	list-style-type:disc; 
+
+	text-align:left;
+
+    color:crimson;
+
+	margin-bottom:5px;
+
+
+
+}
