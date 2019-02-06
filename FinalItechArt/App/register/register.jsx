@@ -9,8 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 import Typography from '@material-ui/core/Typography';
-
-
+import {Redirect} from 'react-router';
+import styles from './css.css';
 
 
  class Register extends React.Component {
@@ -91,12 +91,15 @@ constructor(props) {
 	  
 
   render () {
+    if (this.props.IsSuccess) {
+      return <Redirect to='/auth'/>;
+    }
 
     return (
 
 	
 
-	<Paper className="paper" elevation={10} Component="div">
+	<Paper className="RegPaper" elevation={10} Component="div">
 
       <form onSubmit={this.handleSubmit}>
 
@@ -126,7 +129,6 @@ constructor(props) {
 <li>     <Button type="submit" className="formButton" variant="contained" fullWidth={true}>Register</Button></li>
     
 </ul> 
-
 	 
 
 </form>
@@ -143,7 +145,6 @@ constructor(props) {
 
 
 
-// Store
 
 
 
@@ -156,7 +157,7 @@ constructor(props) {
  const mapStateToProps = state => {
 
   return {
-
+    IsSuccess:state.register.IsSuccess,
     errors:state.register.errors
 
   };

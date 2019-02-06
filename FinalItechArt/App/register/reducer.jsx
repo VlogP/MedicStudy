@@ -12,6 +12,7 @@
     Password:'',
   
     ConfirmPassword:'',
+    IsSuccess:false,
   
     errors:["","","","","","","",""]
   
@@ -27,10 +28,17 @@
   
         return {
   
-          errors:action.errors
+          errors:action.errors,
+          IsSuccess:false
   
         };
-        
+        case 'REQUESTED_SUCCESS':
+  
+        return {
+  
+          IsSuccess:true
+  
+        };
   
       default:
   

@@ -28,6 +28,7 @@ function Header(props) {
           <Link to="/register" className="link"><Button color="inherit" > Register</Button></Link>
           <Link to="/auth" className="link"><Button color="inherit">Login</Button></Link>
           <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>
+          <Link to="/cabinet" className="link" ><Button color="inherit" >My Cabinet</Button></Link>
         </Toolbar>
       </AppBar>
     </div>

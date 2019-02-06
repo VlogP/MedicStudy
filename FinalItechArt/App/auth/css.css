@@ -1,0 +1,85 @@
+ul {
+
+    margin-left: 0; 
+
+    padding-left: 0; 
+
+}
+
+	
+
+
+.AuthPaper li {
+
+
+
+ list-style-type: none; 
+
+ margin:auto;
+
+ 
+
+ 
+
+}
+
+.AuthPaper ul {
+
+ margin-top:5px;
+
+}
+
+
+
+
+
+.AuthPaper{
+
+text-align:center;
+
+width:500px;
+
+margin:auto;
+
+margin-top:150px;
+
+padding-left:20px;
+
+padding-top:20px;
+
+padding-right:20px;
+
+padding-bottom:20px;
+
+
+
+}
+
+
+
+.AuthPaper .formButton{
+
+margin-top:20px;
+
+}
+
+
+
+.AuthPaper h5{
+
+letter-spacing: 5px;
+
+font-weight: bold;
+
+font-family: "Times New Roman", Georgia, Serif;
+
+font-style:italic;
+
+color:#AB47BC;
+
+}
+
+.link{
+	color:white;
+	 text-decoration: none;
+}

@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 import Typography from '@material-ui/core/Typography';
-
+import styles from './css.css';
 
 
 
@@ -77,7 +77,7 @@ constructor(props) {
 
 <ul>
 
-<li>	 <TextField error={this.props.error==""?false:true}  label="Firstname"  margin="normal"  onChange={this.ChangeEmailName}/>  </li>
+<li>	 <TextField error={this.props.error==""?false:true}  label="Email"  margin="normal"  onChange={this.ChangeEmailName}/>  </li>
        
 <li>	 <TextField error={this.props.error==""?false:true} label="Password" margin="normal" type='password'  onChange={this.ChangePassword}/>  </li>
        

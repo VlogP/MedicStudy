@@ -6,6 +6,11 @@ export const requestForErrors = (data) => {
   
   };
 
+  export const requestForSuccess = () => {
+
+    return { type: 'REQUESTED_SUCCESS'}
+  
+  };
  
   
   

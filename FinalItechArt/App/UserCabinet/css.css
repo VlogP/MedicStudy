@@ -1,0 +1,85 @@
+ul {
+
+    margin-left: 0; 
+
+    padding-left: 0; 
+
+}
+
+	
+
+
+.RegPaper li {
+
+
+
+ list-style-type: none; 
+
+ margin:auto;
+
+ 
+
+ 
+
+}
+
+.RegPaper ul {
+
+ margin-top:5px;
+
+}
+
+
+
+
+
+.RegPaper{
+
+text-align:center;
+
+width:1000px;
+
+margin:auto;
+
+margin-top:40px;
+
+padding-left:20px;
+
+padding-top:20px;
+
+padding-right:20px;
+
+padding-bottom:20px;
+
+
+
+}
+
+
+
+.RegPaper .formButton{
+
+margin-top:20px;
+
+}
+
+
+
+.RegPaper h3{
+
+letter-spacing: 5px;
+
+font-weight: bold;
+
+font-family: "Times New Roman", Georgia, Serif;
+
+font-style:italic;
+
+color:#AB47BC;
+
+}
+
+.link{
+	color:white;
+	 text-decoration: none;
+}

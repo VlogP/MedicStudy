@@ -1,5 +1,5 @@
 import {put, call,takeEvery} from 'redux-saga/effects';
-import {requestForErrors,validatePassword,validateName,validateInitials,validateConfirmPassword,validateEmail,RegisterRequest} from './create_action.jsx';
+import {requestForErrors,requestForSuccess,validatePassword,validateName,validateInitials,validateConfirmPassword,validateEmail,RegisterRequest} from './create_action.jsx';
 
 export function* watchRegistration() {
 
@@ -51,6 +51,8 @@ export function* watchRegistration() {
       
       if(IsReadyToSend){
       errors[6]=yield call(RegisterRequest,{Info:e});
+       if(errors[6]=="")
+       yield put(requestForSuccess());
       }
     
       yield put(requestForErrors(errors));

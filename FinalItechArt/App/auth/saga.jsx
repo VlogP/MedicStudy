@@ -15,11 +15,10 @@ export function* watchAuthorize() {
      
      var error=yield call(AuthRequest,{Info:e});
       yield put(requestForError(error));
-      console.log(error);
+      
+
     } catch (error) {
-  
-     
-  
+
     }
   
   }

@@ -9,24 +9,22 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 import Typography from '@material-ui/core/Typography';
+import styles from './css.css';
 
 
 
-
- class AuthForm extends React.Component {
+ class UserCabinet extends React.Component {
 
 constructor(props) {
   
 
         super(props);
         
-         this.state={Email:props.Email,Password:props.Password};
-
-       
+    this.state={Email:props.Email,Password:props.Password,TabNumber:0};      
 		this.ChangeEmailName = this.ChangeEmailName.bind(this);
-
 		this.ChangePassword = this.ChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.ChangeTab=this.ChangeTab.bind(this);
       }
 
   
@@ -51,6 +49,12 @@ constructor(props) {
        this.props.CheckAuth(this.state.Email,this.state.Password);
 
       }
+      
+      ChangeTab(e,value) {
+
+   this.setState({TabNumber:value});
+
+    }
 
 	  
 
@@ -60,7 +64,7 @@ constructor(props) {
 
 	
 
-	<Paper className="AuthPaper" elevation={10} Component="div">
+	<Paper className="UserCabinet" elevation={10} Component="div">
 
       <form onSubmit={this.handleSubmit}>
 
@@ -127,4 +131,4 @@ const mapDispatchToProps =dispatch =>{
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthForm); 
+export default connect(mapStateToProps, mapDispatchToProps)(UserCabinet); 

@@ -20,7 +20,10 @@ export const requestForError = (data) => {
           Password:e.Info.Password
           })
           .then(response=>{
-            console.log(response);
+            sessionStorage.setItem("role",response.data.role);
+            sessionStorage.setItem("token",response.data.token);
+            console.log(sessionStorage.getItem("token"));
+            
           return "";
           })
           .catch(error=>{
