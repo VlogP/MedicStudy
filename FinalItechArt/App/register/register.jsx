@@ -157,9 +157,7 @@ constructor(props) {
 
   return {
 
-   
-
-    errors:state.errors
+    errors:state.register.errors
 
   };
 

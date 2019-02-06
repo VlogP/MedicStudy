@@ -105,7 +105,7 @@ constructor(props) {
 
   return {
 
-    error:state.auth.error
+    error:state.error
 
   };
 
