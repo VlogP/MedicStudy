@@ -5,8 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = {
   root: {
@@ -27,11 +25,8 @@ function Header(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
           <Link to="/register" className="link"><Button color="inherit" > Register</Button></Link>
-          <Button color="inherit">Login</Button>
+          <Link to="/auth" className="link"><Button color="inherit">Login</Button></Link>
           <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>
         </Toolbar>
       </AppBar>
@@ -53,26 +48,3 @@ export default withStyles(styles)(Header);
 
 
 
-/*import React from 'react';
-
-import { Link } from 'react-router-dom';
-
-export default class Header extends React.Component {
-    render() {
-        return (
-            <header>
-                <menu>
-                    <ul>
-                        
-                        <li>
-                            <Link to="/">Блог</Link>
-                        </li>
-                        <li>
-                            <Link to="/register">Обо мне</Link>
-                        </li>
-                    </ul>
-                </menu>
-            </header>
-        );
-    }
-};*/
