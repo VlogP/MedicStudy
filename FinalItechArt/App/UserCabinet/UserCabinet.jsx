@@ -9,9 +9,12 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 import Typography from '@material-ui/core/Typography';
+
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
 import styles from './css.css';
-
-
 
  class UserCabinet extends React.Component {
 
@@ -65,12 +68,30 @@ constructor(props) {
 	
 
 	<Paper className="UserCabinet" elevation={10} Component="div">
+<AppBar position="static">
+          <Tabs value={this.state.TabNumber} onChange={this.ChangeTab}>
+            <Tab label="Item One" />
+            <Tab label="Item Two" />
+            <Tab label="Item Three" />
+          </Tabs>
+        </AppBar>
+{this.state.TabNumber === 0 && <ul>
+
+  <li>	 <TextField   label="Firstname"  margin="normal"  onChange={this.ChangeEmailName}/>  </li>
+         
+  <li>	 <TextField  label="Password" margin="normal" type='password'  onChange={this.ChangePassword}/>  </li>
+         
+  <li>     <Button type="submit" className="formButton" variant="contained" fullWidth={true}>Authorize</Button></li>
+      
+  </ul> }
+{this.state.TabNumber === 1 && <p>Item Two</p>}
+{this.state.TabNumber === 2 && <p>Item Three</p>}
 
       <form onSubmit={this.handleSubmit}>
 
         <Typography variant="h5">
 
-          AUTHORIZATION
+          Cabinet
 
         </Typography>
 
@@ -79,15 +100,7 @@ constructor(props) {
            {this.props.error}
         </Typography>
 
-<ul>
 
-<li>	 <TextField error={this.props.error==""?false:true}  label="Firstname"  margin="normal"  onChange={this.ChangeEmailName}/>  </li>
-       
-<li>	 <TextField error={this.props.error==""?false:true} label="Password" margin="normal" type='password'  onChange={this.ChangePassword}/>  </li>
-       
-<li>     <Button type="submit" className="formButton" variant="contained" fullWidth={true}>Authorize</Button></li>
-    
-</ul> 
 
 	 
 
