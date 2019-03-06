@@ -21,18 +21,31 @@ const styles = {
 
 function Header(props) {   
   const { classes } = props;
+ if(sessionStorage.getItem("token")==null)
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Link to="/register" className="link"><Button color="inherit" > Register</Button></Link>
           <Link to="/auth" className="link"><Button color="inherit">Login</Button></Link>
-          <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>
-          <Link to="/cabinet" className="link" ><Button color="inherit" >My Cabinet</Button></Link>
+          <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>      
         </Toolbar>
       </AppBar>
     </div>
   );
+  else
+  return(
+<div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>         
+          <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>
+         <Link to="/cabinet" className="link" ><Button color="inherit" >My cabinet</Button></Link>
+         <Link to="/" className="link"><Button color="inherit" onClick={()=>sessionStorage.removeItem("token")}>Exit</Button></Link>
+        </Toolbar>
+      </AppBar>
+    </div>
+ );
+ 
 }
 
 Header.propTypes = {

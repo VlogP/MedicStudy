@@ -9,6 +9,7 @@ import rootreducer from './rootreducer.jsx';
 import RegisterReducer from './register/reducer.jsx';
 import AuthReducer from './auth/reducer.jsx';
 import {watchAuthorize} from './auth/saga.jsx' 
+import {watchCabinet} from './UserCabinet/saga.jsx' 
 
  const sagaMiddleware = createSagaMiddleware();
 
@@ -19,6 +20,7 @@ import {watchAuthorize} from './auth/saga.jsx'
  
  sagaMiddleware.run(watchRegistration);
  sagaMiddleware.run(watchAuthorize);
+ sagaMiddleware.run(watchCabinet);
 
 render(
     <Provider store={store}>

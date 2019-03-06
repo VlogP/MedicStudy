@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
+import {InitialRequest} from './create_action.jsx';
 import styles from './css.css';
 
  class UserCabinet extends React.Component {
@@ -22,15 +22,19 @@ constructor(props) {
   
 
         super(props);
-        
-    this.state={Email:props.Email,Password:props.Password,TabNumber:0};      
+     
+    this.state={Ddd:"g",Firstname:this.props.Firstname,TabNumber:0};      
 		this.ChangeEmailName = this.ChangeEmailName.bind(this);
 		this.ChangePassword = this.ChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.ChangeTab=this.ChangeTab.bind(this);
+    this.props.Initial()
+   
+  
       }
 
-  
+     
+ 
 
 	  ChangeEmailName(e){
 
@@ -48,8 +52,9 @@ constructor(props) {
 	   handleSubmit(e) {
 
         e.preventDefault();
-
-       this.props.CheckAuth(this.state.Email,this.state.Password);
+        
+       
+      
 
       }
       
@@ -59,7 +64,6 @@ constructor(props) {
 
     }
 
-	  
 
   render () {
 
@@ -71,30 +75,27 @@ constructor(props) {
 <AppBar position="static">
           <Tabs value={this.state.TabNumber} onChange={this.ChangeTab}>
             <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
+            <Tab label="Item Two" />           
           </Tabs>
         </AppBar>
-{this.state.TabNumber === 0 && <ul>
 
-  <li>	 <TextField   label="Firstname"  margin="normal"  onChange={this.ChangeEmailName}/>  </li>
-         
-  <li>	 <TextField  label="Password" margin="normal" type='password'  onChange={this.ChangePassword}/>  </li>
-         
+{this.state.TabNumber === 0 && <ul>
+ <form onSubmit={this.handleSubmit}>
+
+<li>	 <TextField error={this.props.errors==""?false:true}  label="Firstname"  margin="normal"  onChange={this.ChangeFirstName} helperText={"Actual "+'"'+this.props.Firstname+'"'}/></li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[0]} </Typography>
+<li>	 <TextField error={this.props.errors==""?false:true} label="Lastname" margin="normal"  onChange={this.ChangeLastName} helperText={"Actual "+'"'+this.props.Lastname+'"'}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[1]}  </Typography>
+<li>	 <TextField error={this.props.errors==""?false:true} label="Initials" margin="normal"  onChange={this.ChangeInitialsName}helperText={"Actual "+'"'+this.props.Initials+'"'}/>  </li>
+         <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[2]}  </Typography>
+     
   <li>     <Button type="submit" className="formButton" variant="contained" fullWidth={true}>Authorize</Button></li>
-      
+  </form>
   </ul> }
 {this.state.TabNumber === 1 && <p>Item Two</p>}
-{this.state.TabNumber === 2 && <p>Item Three</p>}
 
-      <form onSubmit={this.handleSubmit}>
-
-        <Typography variant="h5">
-
-          Cabinet
-
-        </Typography>
-
+     
+       
 	  
         <Typography variant="h6" color="error" >
            {this.props.error}
@@ -104,7 +105,7 @@ constructor(props) {
 
 	 
 
-</form>
+
 
   </Paper>
 
@@ -121,8 +122,10 @@ constructor(props) {
  const mapStateToProps = state => {
 
   return {
-
-    error:state.error
+    Firstname:state.CabinetReducer.Firstname,
+    Lastname:state.CabinetReducer.Lastname,
+    Initials:state.CabinetReducer.Initials,
+    errors:state.CabinetReducer.error
 
   };
 
@@ -134,7 +137,8 @@ const mapDispatchToProps =dispatch =>{
 
   return{
 
-  CheckAuth: (Email,Password) => dispatch({ type: "CHECK_AUTH",Email:Email,Password:Password }),
+  Initial: () => dispatch({ type: "CHECK_CABINET" }),
+  
   
   };
 

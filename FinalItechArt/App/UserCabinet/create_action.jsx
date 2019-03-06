@@ -11,17 +11,20 @@ export const requestForError = (data) => {
     return { type: 'REQUESTED_SUCСESS'}
   
   };
+  export const requestForInitial = (data) => {
 
- 
-  export function AuthRequest(e){
+    return { type: 'REQUESTED_INITIAL',info:data}
   
-      return axios.post('',{         
-          Email:e.Info.Email,
-          Password:e.Info.Password
-          })
+  };
+
+  axios.defaults.headers.common['Authorization'] = 
+  'Bearer ' + sessionStorage.getItem('token');
+
+  export function InitialRequest(){
+      return axios.get('cabinet/getdata',)
           .then(response=>{
-            console.log(response);
-          return "";
+           
+          return response.data;
           })
           .catch(error=>{
             console.log(error);

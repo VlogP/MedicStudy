@@ -1,21 +1,23 @@
 import {put, call,takeEvery} from 'redux-saga/effects';
-import {requestForError,AuthRequest} from './create_action.jsx';
+import {requestForInitial,InitialRequest} from './create_action.jsx';
 
-export function* watchAuthorize() {
+export function* watchCabinet() {
 
-    yield takeEvery('CHECK_AUTH', Authorize); 
+    yield takeEvery('CHECK_CABINET', CabinetSaga); 
+
   
   }
   
   
   
-  function* Authorize(e) {
+  function* CabinetSaga() {
   
     try {
      
-     var error=yield call(AuthRequest,{Info:e});
-      yield put(requestForError(error));
-      console.log(error);
+     var error=yield call(InitialRequest);
+      
+      console.log(error)
+      yield put(requestForInitial(error));
     } catch (error) {
   
      

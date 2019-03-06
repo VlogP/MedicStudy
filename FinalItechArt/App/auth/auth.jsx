@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 import Typography from '@material-ui/core/Typography';
+import {Redirect} from 'react-router';
 import styles from './css.css';
 
 
@@ -47,14 +48,18 @@ constructor(props) {
 	   handleSubmit(e) {
 
         e.preventDefault();
-
+  
        this.props.CheckAuth(this.state.Email,this.state.Password);
-
+      
       }
 
 	  
 
   render () {
+
+    if (this.props.IsSuccess) {
+      return <Redirect to='/cabinet'/>;
+    }
 
     return (
 
@@ -74,6 +79,7 @@ constructor(props) {
         <Typography variant="h6" color="error" >
            {this.props.error}
         </Typography>
+        
 
 <ul>
 
@@ -104,7 +110,7 @@ constructor(props) {
  const mapStateToProps = state => {
 
   return {
-
+    IsSuccess:state.auth.IsSuccess,
     error:state.auth.error
 
   };

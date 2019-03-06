@@ -95,9 +95,7 @@ constructor(props) {
       return <Redirect to='/auth'/>;
     }
 
-    return (
-
-	
+    return (	
 
 	<Paper className="RegPaper" elevation={10} Component="div">
 

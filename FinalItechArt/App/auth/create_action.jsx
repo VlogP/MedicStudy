@@ -6,7 +6,7 @@ export const requestForError = (data) => {
   
   };
 
-  export const requestForSucsess = () => {
+  export const requestForSuccess = () => {
 
     return { type: 'REQUESTED_SUCСESS'}
   
@@ -21,13 +21,10 @@ export const requestForError = (data) => {
           })
           .then(response=>{
             sessionStorage.setItem("role",response.data.role);
-            sessionStorage.setItem("token",response.data.token);
-            console.log(sessionStorage.getItem("token"));
-            
+            sessionStorage.setItem("token",response.data.token);                     
           return "";
           })
           .catch(error=>{
-            console.log(error);
           return "Error there is no such user or password is not correct";
           });   
       

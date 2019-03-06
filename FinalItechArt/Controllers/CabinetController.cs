@@ -15,7 +15,7 @@ using FinalltechArt.DB.Models;
 namespace FinalItechArt.Web.Controllers
 {
     
-    [Route("cabinet/")]
+    [Route("cabinet/")]   
     [ApiController]
     public class CabinetController : Controller
     {
@@ -28,7 +28,7 @@ namespace FinalItechArt.Web.Controllers
                CabinetService = _CabinetService;
         }
 
-
+        
         [HttpPost]
         [Route("secondary")]
         public IActionResult UpdateInfo([FromBody]UserDTO CabinetModel)
@@ -51,7 +51,7 @@ namespace FinalItechArt.Web.Controllers
 
             return Ok();
         }
-
+        
         [HttpGet]
         [Route("getdata")]
         public IActionResult GetData()

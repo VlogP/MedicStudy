@@ -1,5 +1,6 @@
 import {put, call,takeEvery} from 'redux-saga/effects';
-import {requestForError,AuthRequest} from './create_action.jsx';
+import {requestForError,requestForSuccess,AuthRequest} from './create_action.jsx';
+
 
 export function* watchAuthorize() {
 
@@ -14,8 +15,11 @@ export function* watchAuthorize() {
     try {
      
      var error=yield call(AuthRequest,{Info:e});
-      yield put(requestForError(error));
+     console.log(error);
+     if(error=="")
+      yield put(requestForSuccess());
       
+      yield put(requestForError(error));
 
     } catch (error) {
 

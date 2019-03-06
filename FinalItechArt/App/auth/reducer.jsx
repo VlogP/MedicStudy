@@ -1,7 +1,6 @@
 const initialState = {
 
-    Email:'',
-  
+    IsSuccess:false,
     error:''  
      
   };
@@ -14,14 +13,14 @@ const initialState = {
   
         return {
   
-          error:action.error
-  
+          error:action.error,
+          
         };
         case 'REQUESTED_SUCСESS':
   
         return {
   
-          error:state.error
+          IsSuccess:true
   
         };
         
