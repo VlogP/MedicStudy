@@ -54,11 +54,12 @@ namespace FinalItechArt.Web.Controllers
         
         [HttpGet]
         [Route("getdata")]
-        public IActionResult GetData()
+        public  IActionResult GetData()
         {
-            string UserId =User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
-          
-            User CurrentUser=CabinetService.GetCurrentData(Int32.Parse(UserId));
+            
+                string UserId =  User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
+            
+              User CurrentUser= CabinetService.GetCurrentData(Int32.Parse(UserId));
 
             return Ok(mapper.Map<UserDTO>(CurrentUser));
         }

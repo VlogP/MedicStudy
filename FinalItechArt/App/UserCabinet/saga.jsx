@@ -1,5 +1,5 @@
 import {put, call,takeEvery} from 'redux-saga/effects';
-import {requestForInitial,InitialRequest} from './create_action.jsx';
+
 
 export function* watchCabinet() {
 
@@ -14,10 +14,10 @@ export function* watchCabinet() {
   
     try {
      
-     var error=yield call(InitialRequest);
+  
       
       console.log(error)
-      yield put(requestForInitial(error));
+  
     } catch (error) {
   
      

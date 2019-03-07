@@ -26,15 +26,7 @@ const initialState = {
           error:state.error
   
         };
-        case 'REQUESTED_INITIAL':
-  
-        return {
-          Firstname:action.info.firstname,
-          Lastname:action.info.lastname,
-          Initials:action.info.initials,
-          error:state.error
-  
-        };
+        
   
       default:
   

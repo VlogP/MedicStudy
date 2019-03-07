@@ -13,8 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {InitialRequest} from './create_action.jsx';
 import styles from './css.css';
+import axios from 'axios';
 
  class UserCabinet extends React.Component {
 
@@ -22,20 +22,31 @@ constructor(props) {
   
 
         super(props);
-     
-    this.state={Ddd:"g",Firstname:this.props.Firstname,TabNumber:0};      
+    
+    this.state={Firstname:'',Lastname:'',Initials:'',newpassword:'',TabNumber:0};      
 		this.ChangeEmailName = this.ChangeEmailName.bind(this);
 		this.ChangePassword = this.ChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.ChangeFirstName = this.ChangeFirstName.bind(this);
     this.ChangeTab=this.ChangeTab.bind(this);
-    this.props.Initial()
-   
+
+    axios.defaults.headers.common['Authorization'] = 
+    'Bearer ' + sessionStorage.getItem('token');
+
+    axios.get(`cabinet/getdata`)
+      .then(res => {
+        const person = res.data;
+        this.setState({Firstname:person.firstname,Lastname:person.lastname,Initials:person.initials});
+      })
   
       }
 
      
  
+      ChangeFirstName(e){
 
+        this.setState({Firstname:e.target.value});
+      }
 	  ChangeEmailName(e){
 
 		  this.setState({Email:e.target.value});
@@ -53,7 +64,7 @@ constructor(props) {
 
         e.preventDefault();
         
-       
+      
       
 
       }
@@ -64,6 +75,7 @@ constructor(props) {
 
     }
 
+   
 
   render () {
 
@@ -82,16 +94,19 @@ constructor(props) {
 {this.state.TabNumber === 0 && <ul>
  <form onSubmit={this.handleSubmit}>
 
-<li>	 <TextField error={this.props.errors==""?false:true}  label="Firstname"  margin="normal"  onChange={this.ChangeFirstName} helperText={"Actual "+'"'+this.props.Firstname+'"'}/></li>
+<li>	 <TextField error={this.props.errors==""?false:true}  label="Firstname"  margin="normal" value={this.state.Firstname}  onChange={this.ChangeFirstName} helperText={"Actual "+'"'+this.props.Firstname+'"'}/></li>
          <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[0]} </Typography>
-<li>	 <TextField error={this.props.errors==""?false:true} label="Lastname" margin="normal"  onChange={this.ChangeLastName} helperText={"Actual "+'"'+this.props.Lastname+'"'}/>  </li>
+<li>	 <TextField error={this.props.errors==""?false:true} label="Lastname" margin="normal" value={this.state.Lastname} onChange={this.ChangeLastName} helperText={"Actual "+'"'+this.props.Lastname+'"'}/>  </li>
          <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[1]}  </Typography>
-<li>	 <TextField error={this.props.errors==""?false:true} label="Initials" margin="normal"  onChange={this.ChangeInitialsName}helperText={"Actual "+'"'+this.props.Initials+'"'}/>  </li>
+<li>	 <TextField error={this.props.errors==""?false:true} label="Initials" margin="normal" value={this.state.Initials}  onChange={this.ChangeInitialsName}helperText={"Actual "+'"'+this.props.Initials+'"'}/>  </li>
          <Typography variant="caption" gutterBottom align="center" >  {this.props.errors[2]}  </Typography>
      
   <li>     <Button type="submit" className="formButton" variant="contained" fullWidth={true}>Authorize</Button></li>
   </form>
   </ul> }
+  
+      
+      
 {this.state.TabNumber === 1 && <p>Item Two</p>}
 
      
