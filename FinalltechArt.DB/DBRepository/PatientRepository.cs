@@ -17,8 +17,7 @@ namespace FinalltechArt.DB.DBRepository
 
         public IEnumerable<PatientTableViewDTO> GetAllSponsor()
         {
-
-           List<PatientTableViewDTO> patienttable=new List<PatientTableViewDTO>();
+            List<PatientTableViewDTO> patienttable=new List<PatientTableViewDTO>();
 
             var  x1 = basecontext.Patients.Include(x=>x.Visits).ThenInclude(c=>c.DrugUnit).ToList();
             foreach(var item in x1)
@@ -30,11 +29,11 @@ namespace FinalltechArt.DB.DBRepository
                     ListDrugs +=drugitem.DrugUnit.Name+",";
                 }
                 string Lastvisit = item.Visits.LastOrDefault()?.VisitDate;
+                var clinicName = basecontext.Clinics.ToList().FirstOrDefault(_ => _.ClinicId.Equals(item.ClinicId)).Name;
              
-
-                ListDrugs =ListDrugs.Remove(ListDrugs.Count()-1);
+                ListDrugs = ListDrugs.Length != 0 ? ListDrugs.Remove(ListDrugs.Count()-1) : "";
               
-                patienttable.Add(new PatientTableViewDTO {BirthDate= item.BirthDate,ClinicId=item.ClinicId,PatientId=item.PatientId,VisitLast=Lastvisit,UsedDrugs=ListDrugs }) ;
+                patienttable.Add(new PatientTableViewDTO {ClinicName = clinicName,BirthDate= item.BirthDate,ClinicId=item.ClinicId,PatientId=item.PatientId,VisitLast=Lastvisit,UsedDrugs=ListDrugs,PatientFirstname = item.Firstname,PatientLastname = item.Lastname }) ;
             }
      
             return patienttable;

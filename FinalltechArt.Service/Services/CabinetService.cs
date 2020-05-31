@@ -37,9 +37,7 @@ namespace FinalltechArt.Service.Services
         {
             return UserRep.FindUserById(Id);
 
-
+            
         }
-
-
     }
 }

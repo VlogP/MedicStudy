@@ -20,7 +20,7 @@ const styles = {
 };
 
 function Header(props) {   
-  const { classes } = props;
+const { classes } = props;
  if(sessionStorage.getItem("token")==null)
   return (
     <div className={classes.root}>
@@ -38,8 +38,9 @@ function Header(props) {
 <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>         
-          <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>
+         <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>
          <Link to="/cabinet" className="link" ><Button color="inherit" >My cabinet</Button></Link>
+         <Link to="/patient" className="link" ><Button color="inherit" >Patients</Button></Link>
          <Link to="/" className="link"><Button color="inherit" onClick={()=>sessionStorage.removeItem("token")}>Exit</Button></Link>
         </Toolbar>
       </AppBar>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataTransferObject.VisitDTOInfoViewOne">
+    <Position X="12.25" Y="1.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service_DB_Transfer\VisitDTOInfoViewOne.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataTransferObject.UserDTO">
+    <Position X="9" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAIABCAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web_Service_Transfer\UserDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataTransferObject.PatientTableViewDTO">
+    <Position X="5.75" Y="1.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAQAAAAABgAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web_Service_Transfer\PatientTableViewDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataTransferObject.PatientDTO">
+    <Position X="4.75" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIEAAAAAACIAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service_DB_Transfer\PatientDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataTransferObject.DrugDTOInfoViewOne">
+    <Position X="1.75" Y="1.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AggAAAAAAAAgAAAAAAAAAAQCAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service_DB_Transfer\DrugDTOInfoViewOne.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataTransferObject.DrugDTO">
+    <Position X="1.75" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AggAAAAAAAIgAAAAAAAQAAQCAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web_Service_Transfer\DrugDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataTransferObject.DataObject">
+    <Position X="8" Y="4" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="DataTransferObject.DataObject.Role">
+        <TypeIdentifier>
+          <NewMemberFileName>DataObjects.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="DataTransferObject.DataObject.DrugType">
+        <TypeIdentifier>
+          <NewMemberFileName>DataObjects.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataObjects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataTransferObject.DataCountDrugType">
+    <Position X="11.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAACABQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Web_Service_Transfer\DataCountDrugType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="20" />
+</ClassDiagram>

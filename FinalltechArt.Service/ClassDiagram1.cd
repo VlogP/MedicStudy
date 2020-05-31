@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FinalltechArt.Service.Services.AuthService" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Services\AuthService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.19" />
+  </Class>
+  <Class Name="FinalltechArt.Service.Services.CabinetService" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="4" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAQ=</HashCode>
+      <FileName>Services\CabinetService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.Service.Services.DrugUnitService" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="4" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>ACoAAAgAAAAAAAMAAABQAAAAAAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\DrugUnitService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.Service.Services.PatientService" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="4" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAIAAAAAAgEAAFAAAAAAAAAAAAMABAQ=</HashCode>
+      <FileName>Services\PatientService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.Service.Services.RegisterService" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAAAAQ=</HashCode>
+      <FileName>Services\RegisterService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="20" />
+</ClassDiagram>

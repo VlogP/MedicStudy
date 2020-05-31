@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using DataTransferObject;
+using FinalItechArt.Web.Infrastructure;
 using FinalItechArt.Web.Models;
-using FinalltechArt.Service.Services;
 using FinalltechArt.Service.Interfaces;
-using FinalltechArt.DB.Models;
-using FinalltechArt.DB.Interfaces;
-
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using FinalItechArt.Web.Infrastructure;
-using DataTransferObject;
 
 namespace FinalItechArt.Web.Controllers
 {

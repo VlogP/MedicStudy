@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using FinalItechArt.Web.Models;
-using System.Security.Claims;
+﻿using AutoMapper;
 using DataTransferObject;
-using FinalltechArt.Service.Interfaces;
-using AutoMapper;
 using FinalltechArt.DB.Models;
- 
+using FinalltechArt.Service.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Security.Claims;
+
 namespace FinalItechArt.Web.Controllers
 {
-    
+
     [Route("cabinet/")]   
     [ApiController]
     public class CabinetController : Controller

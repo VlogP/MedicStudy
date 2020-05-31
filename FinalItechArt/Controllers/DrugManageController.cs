@@ -19,7 +19,7 @@ namespace FinalItechArt.Web.Controllers
 {
     [Route("drugmanage/")]
     [ApiController]
-    public class DrugManageController : ControllerBase
+    public class DrugManageController : Controller
     {
         IMapper Mapper;
         IDrugUnitService DrugService;

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FinalltechArt.DB.DBRepository.BaseRepository&lt;T&gt;">
+    <Position X="10" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAAAAAAAAAACAAAQAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>DBRepository\BaseRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.DB.DBRepository.ClinicRepository">
+    <Position X="8.25" Y="7.5" Width="3" />
+    <InheritanceLine Type="FinalltechArt.DB.DBRepository.BaseRepository&lt;T&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="11.625" Y="4.494" />
+        <Point X="11.625" Y="8.312" />
+        <Point X="11.25" Y="8.312" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DBRepository\ClinicRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.DB.DBRepository.DrugRepository">
+    <Position X="12.75" Y="6" Width="3.5" />
+    <InheritanceLine Type="FinalltechArt.DB.DBRepository.BaseRepository&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="12.194" Y="4.494" />
+        <Point X="12.194" Y="5.625" />
+        <Point X="14.5" Y="5.625" />
+        <Point X="14.5" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAACAEAAABQAAAAAAEAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>DBRepository\DrugRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.DB.DBRepository.PatientRepository">
+    <Position X="4.5" Y="0.75" Width="4" />
+    <InheritanceLine Type="FinalltechArt.DB.DBRepository.BaseRepository&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="10" Y="1.276" />
+        <Point X="8.5" Y="1.276" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAABAAAAAAAIAACAAAAABAA=</HashCode>
+      <FileName>DBRepository\PatientRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.DB.DBRepository.UserRepository">
+    <Position X="14.5" Y="1" Width="3.75" />
+    <InheritanceLine Type="FinalltechArt.DB.DBRepository.BaseRepository&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="13.25" Y="1.017" />
+        <Point X="14.5" Y="1.017" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAg=</HashCode>
+      <FileName>DBRepository\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalltechArt.DB.DBRepository.VisitRepository">
+    <Position X="4.25" Y="5.25" Width="3.25" />
+    <InheritanceLine Type="FinalltechArt.DB.DBRepository.BaseRepository&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="10" Y="2.125" />
+        <Point X="9.625" Y="2.125" />
+        <Point X="9.625" Y="6.154" />
+        <Point X="7.5" Y="6.154" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DBRepository\VisitRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="20" />
+</ClassDiagram>

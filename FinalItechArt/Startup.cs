@@ -60,7 +60,7 @@ namespace FinalItechArt
                 });
 
 
-            string con = "Server=WSE-110-71\\SQLEXPRESS;Database=Medic;Trusted_Connection=True;MultipleActiveResultSets=true";
+            string con = "Server=USER-PC\\SQLEXPRESS;Database=Medic;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(con));
 
             services.AddScoped<IDrugRepository, DrugRepository>();

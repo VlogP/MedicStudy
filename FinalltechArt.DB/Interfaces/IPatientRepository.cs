@@ -7,7 +7,7 @@ using DataTransferObject;
 
 namespace FinalltechArt.DB.Interfaces
 {
-   public interface IPatientRepository
+   public interface IPatientRepository: IBaseRepository<Patient>
     {
         IEnumerable<PatientTableViewDTO> GetAllSponsor();
         IEnumerable<PatientTableViewDTO> GetAllResearcher(string IdClinic);

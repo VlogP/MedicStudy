@@ -17,7 +17,7 @@ namespace FinalltechArt.DB.DBRepository
         }
         public User FindUserByEmail(string email)
         {
-            return basecontext.Users.FirstOrDefault(x => x.Email == email);
+            return basecontext.Users.FirstOrDefault(x => x.Email.Equals(email));
 
         }
         public User FindUserById(int Id)

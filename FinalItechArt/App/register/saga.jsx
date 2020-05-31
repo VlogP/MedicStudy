@@ -42,11 +42,11 @@ export function* watchRegistration() {
   
        IsOk = yield call(validateName,{Name:e.FirstName});
   
-      if(!IsOk){errors[0]="Consist only of letters";IsReadyToSend=false;	}
+      if(!IsOk){errors[0]="Consist only of letters. Must be more then 3";IsReadyToSend=false;	}
       
        IsOk = yield call(validateName,{Name:e.Lastname});
   
-      if(!IsOk){errors[1]="Consist only of letters";IsReadyToSend=false;}	
+      if(!IsOk){errors[1]="Consist only of letters. Must be more then 3";IsReadyToSend=false;}	
   
       
       if(IsReadyToSend){

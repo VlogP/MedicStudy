@@ -2,7 +2,7 @@
 
 namespace FinalltechArt.DB.Migrations
 {
-    public partial class change_patient : Migration
+    public partial class InitialFirst : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

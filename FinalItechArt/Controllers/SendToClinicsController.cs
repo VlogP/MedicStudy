@@ -13,7 +13,7 @@ namespace FinalItechArt.Web.Controllers
 {
     [Route("send_drugs/")]
     [ApiController]
-    public class SendToClinicsController : ControllerBase
+    public class SendToClinicsController : Controller
     {
         IDrugUnitService DrugService;
         public SendToClinicsController(IDrugUnitService _DrugService)

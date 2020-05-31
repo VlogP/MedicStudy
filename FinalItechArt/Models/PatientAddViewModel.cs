@@ -12,6 +12,7 @@ namespace FinalItechArt.Web.Models
         public string BirthDate { get; set; }
 
         public string Gender { get; set; }
+
         public string Firstname { get; set; }
 
         public string Lastname { get; set; }
