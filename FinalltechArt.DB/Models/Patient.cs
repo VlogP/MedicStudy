@@ -9,7 +9,7 @@ namespace FinalltechArt.DB.Models
    public class Patient
     {
         [Key]
-        public string PatientId { get; set; }
+        public int PatientId { get; set; }
         [Required(ErrorMessage = "Doesn't set the first name")]
         [RegularExpression(@"^[a-zA-Z]{1,}$", ErrorMessage = "Wrong first name view")]
         public string Firstname { get; set; }
@@ -26,6 +26,9 @@ namespace FinalltechArt.DB.Models
         [Required(ErrorMessage = "Doesn't set the status")]
         public string Status { get; set; }
         public string DrugType { get; set; }
+
+        public int? IllnesId { get; set; }
+
         public List<Visit> Visits { get; set; }
     }
 }

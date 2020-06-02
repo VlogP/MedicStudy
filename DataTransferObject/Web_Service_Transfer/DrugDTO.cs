@@ -22,5 +22,7 @@ namespace DataTransferObject
 
         public int Sort { get; set; }
 
+        public int Count { get; set; }
+
     }
 }

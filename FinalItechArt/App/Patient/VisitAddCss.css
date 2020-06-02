@@ -6,18 +6,18 @@ ul {
 	
 
 
-.UserCabinet li {
+.VisitAdd li {
     list-style-type: none; 
     margin:auto;
 }
 
-.UserCabinet ul {
+.VisitAdd ul {
     margin-top:5px;
 }
 
-.PatientTable{
+.VisitAdd{
     text-align:center;
-    width:1500px;
+    width:1000px;
     margin:auto;
     margin-top:20px;
     padding-left:20px;
@@ -26,11 +26,11 @@ ul {
     padding-bottom:20px;
 }
 
-.UserCabinet .formButton{
+.VisitAdd .formButton{
     margin-top:20px;
 }
 
-.UserCabinet h3{
+.VisitAdd h3{
     letter-spacing: 5px;
     font-weight: bold;
     font-family: "Times New Roman", Georgia, Serif;

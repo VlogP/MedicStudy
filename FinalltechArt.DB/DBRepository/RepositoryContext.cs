@@ -23,5 +23,9 @@ namespace FinalltechArt.DB.DBRepository
         public DbSet<Status> Statuses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Visit> Visits { get; set; }
+
+        public DbSet<Illnes> Illnes { get; set; }
+
+        public DbSet<DrugAtClinics> DrugAtClinics { get; set; }
     }
 }

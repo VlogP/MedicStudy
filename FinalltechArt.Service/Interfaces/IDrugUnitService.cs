@@ -11,10 +11,10 @@ namespace FinalltechArt.Service.Interfaces
         IEnumerable<DrugUnit> GetAll();
         IEnumerable<DrugUnit> Sort(int SelectedSort);
         void Add(DrugUnit Drug);
-        bool Check(string DrugId);
+        bool Check(int DrugId);
         void CountDrugTypes(DataCountDrugType Variable);
         void SendDrugs(DataCountDrugType Variable);       
         IEnumerable<Clinic> GetClinics();
-        void Delete(string DrugId);
+        void Delete(int DrugId);
     }
 }

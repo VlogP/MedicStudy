@@ -8,8 +8,8 @@ namespace FinalltechArt.DB.Models
 {
     public class DrugUnit
     {
-       [Key]
-        public string DrugUnitId { get; set; }
+        [Key]
+        public int DrugUnitId { get; set; }
         [Required(ErrorMessage = "Doesn't set the type of drug")]
         public string DrugType { get; set; }
         [Required(ErrorMessage = "Doesn't set the name")]
@@ -25,6 +25,8 @@ namespace FinalltechArt.DB.Models
         [Required(ErrorMessage = "Doesn't set the description")]
         public string Description { get; set; }
         public string ClinicId { get; set; }
+
+        public int Count { get; set; }
 
         public int? VisitId { get; set; }
         public Visit Visit { get; set; }

@@ -1,0 +1,45 @@
+ul {
+    margin-left: 0; 
+    padding-left: 0; 
+}
+
+	
+
+
+.DrugEdit li {
+    list-style-type: none; 
+    margin:auto;
+}
+
+.DrugEdit ul {
+    margin-top:5px;
+}
+
+.DrugEdit{
+    text-align:center;
+    width:1000px;
+    margin:auto;
+    margin-top:20px;
+    padding-left:20px;
+    padding-top:20px;
+    padding-right:20px;
+    padding-bottom:20px;
+}
+
+.DrugEdit .formButton{
+    margin-top:20px;
+}
+
+.DrugEdit h3{
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-family: "Times New Roman", Georgia, Serif;
+    font-style:italic;
+    color:#AB47BC;
+    margin-bottom: 20px;
+}
+
+.link{
+	color:white;
+	text-decoration: none;
+}

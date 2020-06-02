@@ -36,26 +36,23 @@ namespace FinalltechArt.Service.Services
         {          
             string ClinicId = UserRep.FindUserById(ResearcherId).ClinicId;
 
-            if (!PatientRep.Check(ClinicId + "-" + patient.PatientId))
-                return false;
             patient.ClinicId = ClinicId;
-            patient.PatientId = ClinicId + "-" + patient.PatientId;
-            patient.Status = "Screening";
-
-            Visit visit = new Visit { PatientId = patient.PatientId, VisitDate = DateTime.Now.ToShortDateString() };
-            PatientRep.Add(patient);
+            patient.Status = "1";
+            var c = PatientRep.Add(patient);
+            PatientRep.Save();
+            Visit visit = new Visit { PatientId = c.PatientId, VisitDate = DateTime.Now.ToShortDateString() };
             VisitRep.Add(visit);
             VisitRep.Save();
 
             return true;
         }
 
-      public PatientDTO GetFullInfoOne(string Id)
+      public PatientDTO GetFullInfoOne(int Id)
         {
             return PatientRep.GetFullInfoOne(Id);
         }
 
-        public bool NotFullCompleteResearch(string Id)
+        public bool NotFullCompleteResearch(int Id)
         {
             Patient patient = PatientRep.CheckStatus(Id);
             if (patient?.Status == "Not full end" || patient?.Status == "Full end")
@@ -67,7 +64,7 @@ namespace FinalltechArt.Service.Services
             return true;
         }
 
-        public bool RegisterNewVisit(string Id,int ResearcherId)
+        public bool RegisterNewVisit(int Id,int ResearcherId)
         {
             Patient patient = PatientRep.CheckStatus(Id);
             

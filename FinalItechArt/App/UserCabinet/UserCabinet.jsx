@@ -8,6 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import styles from './css.css';
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -33,12 +37,13 @@ function validatePassword(Password){
 export default class UserCabinet extends React.Component {
 constructor(props) {
     super(props);    
-    this.state={Firstname:'',Lastname:'',Initials:'',NewPassword:'',NewConfirmPassword:'',TabNumber:0,Errors:["","","","",""],IsLoaded:false,OldFirstname:'',OldLastname:'',OldInitials:'',NotificationShow:false};      
+    this.state={Firstname:'',Lastname:'',Initials:'',NewPassword:'',NewConfirmPassword:'',ClinicId:'1',TabNumber:0,Errors:["","","","",""],IsLoaded:false,OldFirstname:'',OldLastname:'',OldInitials:'',NotificationShow:false};      
     this.ChangeTab=this.ChangeTab.bind(this);
     this.UpdateMainData=this.UpdateMainData.bind(this);
     this.ChangeFirstname=this.ChangeFirstname.bind(this);
     this.ChangeInitials=this.ChangeInitials.bind(this);
     this.ChangeLastname=this.ChangeLastname.bind(this);
+    this.ChangeClinicId=this.ChangeClinicId.bind(this);
     this.ChangePassword=this.ChangePassword.bind(this);
     this.ChangeConfirmPassword=this.ChangeConfirmPassword.bind(this);
     this.UpdatePassword=this.UpdatePassword.bind(this);
@@ -59,6 +64,7 @@ componentDidMount() {
             OldFirstname:person.firstname,
             OldLastname:person.lastname,
             OldInitials:person.initials,
+            ClinicId:person.clinicId,
             IsLoaded:true
           });
         }
@@ -102,7 +108,8 @@ UpdateMainData() {
       axios.post('cabinet/secondary',{
         Firstname:this.state.Firstname,   
         Lastname:this.state.Lastname,   
-        Initials:this.state.Initials
+        Initials:this.state.Initials,
+        ClinicId:this.state.ClinicId
       }).then(_ => {
         this.setState({
           NotificationShow:true,
@@ -182,6 +189,10 @@ ChangeInitials(e){
   this.setState({Initials:e.target.value});
 }
 
+ChangeClinicId(e){
+  this.setState({ClinicId:e.target.value});
+}
+
 CloseNotification(e){
   this.setState({NotificationShow:false});
 }
@@ -203,7 +214,22 @@ return (
       <li><TextField error={this.state.Errors[1].length} label="Lastname" margin="normal" value={this.state.Lastname} onChange = {this.ChangeLastname} helperText={"Actual "+'"'+this.state.OldLastname+'"'}/></li>
             <Typography variant="caption" gutterBottom align="center" >  {this.state.Errors[1]}</Typography>
       <li><TextField error={this.state.Errors[2].length} label="Initials" margin="normal" value={this.state.Initials} onChange = {this.ChangeInitials} helperText={"Actual "+'"'+this.state.OldInitials+'"'}/></li>
-            <Typography variant="caption" gutterBottom align="center" >  {this.state.Errors[2]}</Typography>    
+            <Typography variant="caption" gutterBottom align="center" >  {this.state.Errors[2]}</Typography>  
+      <li><FormControl>
+            <InputLabel id="demo-simple-select-label-1">Clinic</InputLabel>
+            <Select
+            labelId="demo-simple-select-label-1"
+            id="demo-simple-select-1"
+            value={this.state.ClinicId}
+            style ={{width:"200px",textAlign:"left"}}
+            onChange={this.ChangeClinicId}
+            >
+            <MenuItem value={1}>Grodno clinic</MenuItem>
+            <MenuItem value={2}>Minsk clinic</MenuItem>
+            <MenuItem value={3}>Brest clinic</MenuItem>
+            </Select>
+            </FormControl>
+      </li>  
       <li><Button className="formButton" variant="contained" fullWidth={true} onClick = {this.UpdateMainData}>Update main data</Button></li>
     </ul> : this.state.TabNumber == 0 && <CircularProgress color="secondary" style ={{margin:"200px"}} />   
   }

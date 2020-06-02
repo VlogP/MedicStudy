@@ -41,6 +41,10 @@ const { classes } = props;
          <Link to="/" className="link" ><Button color="inherit" >Menu</Button></Link>
          <Link to="/cabinet" className="link" ><Button color="inherit" >My cabinet</Button></Link>
          <Link to="/patient" className="link" ><Button color="inherit" >Patients</Button></Link>
+         <Link to="/drug" className="link" ><Button color="inherit" >Drugs</Button></Link>
+         {sessionStorage.getItem('role') == 'Sponsor' &&
+         <Link to="/analyze" className="link" ><Button color="inherit" >Analyze</Button></Link>
+         }
          <Link to="/" className="link"><Button color="inherit" onClick={()=>sessionStorage.removeItem("token")}>Exit</Button></Link>
         </Toolbar>
       </AppBar>

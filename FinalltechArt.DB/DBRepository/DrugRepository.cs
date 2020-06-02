@@ -67,21 +67,21 @@ namespace FinalltechArt.DB.DBRepository
             
         }
 
-        public bool Check(string DrugId)
+        public bool Check(int DrugId)
         {
 
             var element = basecontext.DrugUnits.FirstOrDefault(x => x.DrugUnitId == DrugId);
                   
-            return element == null;
+            return true;
         }
-        public void Delete(string DrugId)
+        public void Delete(int DrugId)
         {
 
-            var element = basecontext.DrugUnits.FirstOrDefault(x => x.DrugUnitId == DrugId);
+            var element = basecontext.DrugUnits.FirstOrDefault(x => x.DrugUnitId == DrugId);  
             
-            basecontext.DrugUnits.Remove(element);
-            
+            basecontext.DrugUnits.Remove(element);         
         }
+
         public void SendDrugs(DataCountDrugType Variable)
         {
             

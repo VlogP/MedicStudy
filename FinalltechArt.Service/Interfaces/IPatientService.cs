@@ -11,8 +11,8 @@ namespace FinalltechArt.Service.Interfaces
         IEnumerable<PatientTableViewDTO> GetAllSponsorPatients();
         IEnumerable<PatientTableViewDTO> GetAllResearcherPatients(int IdResearcher);
         bool AddPatient(Patient patient, int ResearcherId);
-        PatientDTO GetFullInfoOne(string Id);
-        bool RegisterNewVisit(string Id,int ResearcherId);
-        bool NotFullCompleteResearch(string Id);
+        PatientDTO GetFullInfoOne(int Id);
+        bool RegisterNewVisit(int Id,int ResearcherId);
+        bool NotFullCompleteResearch(int Id);
     }
 }

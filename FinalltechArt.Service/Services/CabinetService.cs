@@ -21,6 +21,7 @@ namespace FinalltechArt.Service.Services
             UpdateUser.Firstname= user.Firstname;
             UpdateUser.Lastname= user.Lastname;
             UpdateUser.Initials= user.Initials;
+            UpdateUser.ClinicId = user.ClinicId;
             UserRep.Save();
         }
 

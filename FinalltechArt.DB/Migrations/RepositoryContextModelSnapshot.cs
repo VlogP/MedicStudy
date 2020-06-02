@@ -32,6 +32,25 @@ namespace FinalltechArt.DB.Migrations
                     b.ToTable("Clinics");
                 });
 
+            modelBuilder.Entity("FinalltechArt.DB.Models.DrugAtClinics", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClinicId");
+
+                    b.Property<int>("Count");
+
+                    b.Property<int>("DrugUnitId");
+
+                    b.Property<string>("DrugUnitName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugAtClinics");
+                });
+
             modelBuilder.Entity("FinalltechArt.DB.Models.DrugType", b =>
                 {
                     b.Property<int>("DrugTypeId")
@@ -47,13 +66,16 @@ namespace FinalltechArt.DB.Migrations
 
             modelBuilder.Entity("FinalltechArt.DB.Models.DrugUnit", b =>
                 {
-                    b.Property<string>("DrugUnitId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("DrugUnitId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Capacity")
                         .IsRequired();
 
                     b.Property<string>("ClinicId");
+
+                    b.Property<int>("Count");
 
                     b.Property<string>("Description")
                         .IsRequired();
@@ -94,10 +116,24 @@ namespace FinalltechArt.DB.Migrations
                     b.ToTable("Genders");
                 });
 
+            modelBuilder.Entity("FinalltechArt.DB.Models.Illnes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Illnes");
+                });
+
             modelBuilder.Entity("FinalltechArt.DB.Models.Patient", b =>
                 {
-                    b.Property<string>("PatientId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("PatientId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BirthDate")
                         .IsRequired();
@@ -112,6 +148,8 @@ namespace FinalltechArt.DB.Migrations
 
                     b.Property<string>("Gender")
                         .IsRequired();
+
+                    b.Property<int?>("IllnesId");
 
                     b.Property<string>("Lastname")
                         .IsRequired();
@@ -188,8 +226,11 @@ namespace FinalltechArt.DB.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("PatientId")
-                        .IsRequired();
+                    b.Property<int?>("Count");
+
+                    b.Property<int?>("DrugAtClinicId");
+
+                    b.Property<int>("PatientId");
 
                     b.Property<string>("VisitDate")
                         .IsRequired();

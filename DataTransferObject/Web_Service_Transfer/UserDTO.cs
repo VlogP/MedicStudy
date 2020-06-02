@@ -10,5 +10,6 @@ namespace DataTransferObject
         public string Lastname { get; set; }
         public string Initials { get; set; }
         public string NewPassword { get; set; }
+        public string ClinicId { get; set; }
     }
 }

@@ -16,6 +16,8 @@ namespace DataTransferObject
         public string Gender { get; set; }
        
         public string Status { get; set; }
+
+        public int IllnesId { get; set; }
         public List<VisitDTOInfoViewOne> VisitDTO { get; set; }
     }
 }

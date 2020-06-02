@@ -29,7 +29,7 @@ namespace FinalltechArt.Service.Services
             DrugRep.Add(Drug);
             DrugRep.Save();
         }
-        public bool Check(string DrugId)
+        public bool Check(int DrugId)
         {
          
             return DrugRep.Check(DrugId);
@@ -52,7 +52,7 @@ namespace FinalltechArt.Service.Services
 
             return ClinicRep.GetAll();
         }
-        public void Delete(string DrugId)
+        public void Delete(int DrugId)
         {
             DrugRep.Delete(DrugId);
             DrugRep.Save();

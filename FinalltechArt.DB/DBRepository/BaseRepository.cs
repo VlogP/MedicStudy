@@ -28,9 +28,11 @@ namespace FinalltechArt.DB.DBRepository
             return basecontext.Set<T>().Count();
         }
 
-        public virtual void Add(T entity)
+        public virtual T Add(T entity)
         {      
-            basecontext.Set<T>().Add(entity);
+            var newEntity = basecontext.Set<T>().Add(entity);
+
+            return newEntity.Entity;
         }
 
         public virtual void Save()

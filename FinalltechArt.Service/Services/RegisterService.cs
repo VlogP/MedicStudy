@@ -23,6 +23,7 @@ namespace FinalltechArt.Service.Services
             SaltHash saltHash = new SaltHash(user.Password);
             user.Sault = saltHash.Salt;
             user.Password = saltHash.Hash;
+            user.ClinicId = "1";
             UserRep.Add(user);UserRep.Save();
         }
 

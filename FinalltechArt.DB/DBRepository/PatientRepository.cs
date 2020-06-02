@@ -33,7 +33,7 @@ namespace FinalltechArt.DB.DBRepository
              
                 ListDrugs = ListDrugs.Length != 0 ? ListDrugs.Remove(ListDrugs.Count()-1) : "";
               
-                patienttable.Add(new PatientTableViewDTO {ClinicName = clinicName,BirthDate= item.BirthDate,ClinicId=item.ClinicId,PatientId=item.PatientId,VisitLast=Lastvisit,UsedDrugs=ListDrugs,PatientFirstname = item.Firstname,PatientLastname = item.Lastname }) ;
+                patienttable.Add(new PatientTableViewDTO { Status = item.Status,ClinicName = clinicName,BirthDate= item.BirthDate,ClinicId=item.ClinicId,PatientId=item.PatientId,VisitLast=Lastvisit,UsedDrugs=ListDrugs,PatientFirstname = item.Firstname,PatientLastname = item.Lastname }) ;
             }
      
             return patienttable;
@@ -53,16 +53,17 @@ namespace FinalltechArt.DB.DBRepository
                     ListDrugs += drugitem.DrugUnit?.Name + ",";
                 }
                 string Lastvisit = item.Visits.LastOrDefault()?.VisitDate;
+                var clinicName = basecontext.Clinics.ToList().FirstOrDefault(_ => _.ClinicId.Equals(item.ClinicId)).Name;
 
-                ListDrugs = ListDrugs.Remove(ListDrugs.Count() - 1);
+                ListDrugs = ListDrugs.Length != 0 ? ListDrugs.Remove(ListDrugs.Count() - 1) : "";
 
-                patienttable.Add(new PatientTableViewDTO { BirthDate = item.BirthDate, ClinicId = item.ClinicId, PatientId = item.PatientId, VisitLast = Lastvisit, UsedDrugs = ListDrugs });
+                patienttable.Add(new PatientTableViewDTO { Status = item.Status,ClinicName = clinicName, BirthDate = item.BirthDate, ClinicId = item.ClinicId, PatientId = item.PatientId, VisitLast = Lastvisit, UsedDrugs = ListDrugs, PatientFirstname = item.Firstname, PatientLastname = item.Lastname });
             }
 
             return patienttable;
 
         }
-        public bool Check(string IdPatient)
+        public bool Check(int IdPatient)
         {
 
             var patient = basecontext.Patients.FirstOrDefault(x => x.PatientId == IdPatient);
@@ -70,7 +71,7 @@ namespace FinalltechArt.DB.DBRepository
             return patient==null;
 
         }
-        public Patient CheckStatus(string IdPatient)
+        public Patient CheckStatus(int IdPatient)
         {
 
             var patient = basecontext.Patients.FirstOrDefault(x => x.PatientId == IdPatient);
@@ -79,7 +80,7 @@ namespace FinalltechArt.DB.DBRepository
 
         }
 
-        public PatientDTO GetFullInfoOne(string Id)
+        public PatientDTO GetFullInfoOne(int Id)
         {
 
             PatientDTO patient = basecontext.Patients.Where(x => x.PatientId == Id).Select(x=>new PatientDTO
@@ -89,25 +90,27 @@ namespace FinalltechArt.DB.DBRepository
                 Gender = x.Gender,
                 Lastname = x.Lastname,
                 Status = x.Status,
+                IllnesId = x.IllnesId.Value,
                 VisitDTO = new List<VisitDTOInfoViewOne>()
             }).FirstOrDefault();
 
 
             if (patient != null)
             {
-                patient.VisitDTO = basecontext.Visits.Where(v=>v.PatientId==Id).Join(basecontext.DrugUnits, v => v.VisitId, d => d.VisitId, (v, d) => new VisitDTOInfoViewOne
+                var visits = basecontext.Visits.Where(v => v.PatientId == Id).ToList();
+
+                patient.VisitDTO = visits.Select(item => new VisitDTOInfoViewOne
                 {
-                    VisitDate = v.VisitDate,
-                    DrugUnit = new DrugDTOInfoViewOne
-                    {
-                        Name = d.Name,
-                        Capacity = d.Capacity,
-                        Description = d.Description,
-                        DrugType = d.DrugType,
-                        Manufacturer = d.Manufacturer,
-                        TypeCapacity = d.TypeCapacity
-                    }
+                    VisitDate = item.VisitDate,
+                    DrugUnit = basecontext.DrugUnits.FirstOrDefault(drug => drug.VisitId == item.VisitId) != null ? new DrugDTOInfoViewOne { 
+                       Name = basecontext.DrugUnits.FirstOrDefault(drug => drug.VisitId == item.VisitId)?.Name,
+                       Capacity = basecontext.DrugUnits.FirstOrDefault(drug => drug.VisitId == item.VisitId)?.Capacity,
+                       Description = basecontext.DrugUnits.FirstOrDefault(drug => drug.VisitId == item.VisitId)?.Description,
+                       DrugType = basecontext.DrugUnits.FirstOrDefault(drug => drug.VisitId == item.VisitId)?.DrugType,
+                       Manufacturer = basecontext.DrugUnits.FirstOrDefault(drug => drug.VisitId == item.VisitId)?.Manufacturer,
+                    } : null
                 }).ToList();
+                
             }
 
             return patient;

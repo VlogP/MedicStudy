@@ -8,7 +8,7 @@ namespace FinalltechArt.DB.Interfaces
     {
           IEnumerable<T> GetAll();
           int Count();
-          void Add(T entity);
+          T Add(T entity);
           void Save();     
     }
 }

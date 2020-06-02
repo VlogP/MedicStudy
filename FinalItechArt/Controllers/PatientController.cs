@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using FinalItechArt.Web.Models;
 using FinalltechArt.DB.Models;
+using FinalltechArt.DB.DBRepository;
 
 namespace FinalItechArt.Web.Controllers
 {
@@ -23,10 +24,13 @@ namespace FinalItechArt.Web.Controllers
     {
         private IPatientService myrep;
         private IMapper mapper;
-        public PatientController( IPatientService myrep,IMapper mapper)
+        RepositoryContext repositoryContext;
+
+        public PatientController( IPatientService myrep,IMapper mapper, RepositoryContext _repositoryContext)
         {
             this.myrep = myrep;
             this.mapper = mapper;
+            repositoryContext = _repositoryContext;
         }
 
         [HttpGet]
@@ -44,10 +48,25 @@ namespace FinalItechArt.Web.Controllers
             return Ok(myrep.GetAllResearcherPatients(Int32.Parse(UserId)));
         }
 
+        [Authorize(Roles = "Researcher")]
+        [Route("update")]
+        [HttpPost]
+        public IActionResult UpdatePatient([FromBody]PatientAddViewModel patient)
+        {
+            string UserId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
+
+            var entity = repositoryContext.Patients.FirstOrDefault(item => item.PatientId == Int32.Parse(patient.PatientId));
+            entity.Status = patient.Status.ToString();
+            repositoryContext.Patients.Update(entity);
+            repositoryContext.SaveChanges();
+
+            return Ok();
+        }
+
         [HttpPost]
         public IActionResult AddPatient([FromBody]PatientAddViewModel patient)
         {
-            string UserId = "1"; //User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
+            string UserId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name).Value;
 
             if (!myrep.AddPatient(mapper.Map<Patient>(patient), Int32.Parse(UserId))) return BadRequest();
 
@@ -55,13 +74,13 @@ namespace FinalItechArt.Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetFullInfoAboutOne(string id)
+        public IActionResult GetFullInfoAboutOne(int id)
         {          
             return Ok(myrep.GetFullInfoOne(id));
         }
 
         [HttpPost("{id}")]
-        public IActionResult RegisterNewVisit(string id)
+        public IActionResult RegisterNewVisit(int id)
         {
            
 
@@ -73,7 +92,7 @@ namespace FinalItechArt.Web.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult NotFullCompleteResearch(string id)
+        public IActionResult NotFullCompleteResearch(int id)
         {
 
 

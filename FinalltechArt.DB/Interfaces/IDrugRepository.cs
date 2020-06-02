@@ -10,11 +10,11 @@ namespace FinalltechArt.DB.Interfaces
    public interface IDrugRepository:IBaseRepository<DrugUnit>
     {
         IEnumerable<DrugUnit> Sort(int SelectedSort);
-        bool Check(string DrugId);
+        bool Check(int DrugId);
         void CountDrugTypes(DataCountDrugType Variable);
         void CountDrugTypesInClinic(DataCountDrugType Variable);
         void SendDrugs(DataCountDrugType Variable);
         void TakeDrugToVisit(DataCountDrugType Variable, int VisitId);
-        void Delete(string DrugId);
+        void Delete(int DrugId);
     }
 }
