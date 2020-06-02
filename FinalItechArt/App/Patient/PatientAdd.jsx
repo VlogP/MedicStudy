@@ -71,13 +71,14 @@ AddPatient(event){
     }
 
     this.setState({Errors:arrayErrors});
-
+    var date = new Date(this.state.Birthday).getDate() > 9 ? new Date(this.state.Birthday).getDate() : "0" + new Date(this.state.Birthday).getDate()
+    var month = new Date(this.state.Birthday).getMonth() > 9 ? new Date(this.state.Birthday).getMonth() : "0" + new Date(this.state.Birthday).getMonth()
     if(isValid) {    
         axios.post('/patients',{
             NewPassword:this.state.NewPassword,
             Firstname: this.state.Firstname,
             Lastname: this.state.Lastname,
-            BirthDate: new Date(this.state.Birthday).toLocaleDateString(),
+            BirthDate: date + "." + month + "." + new Date(this.state.Birthday).getFullYear(),
             Gender: this.state.Sex,
             IllnesId: this.state.IllnesId
           }).then(_ => {

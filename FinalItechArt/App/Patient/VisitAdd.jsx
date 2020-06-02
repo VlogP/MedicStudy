@@ -46,11 +46,13 @@ componentDidMount() {
 
 SendDrug(event){     
 
-    var isValid = this.state.Count <= this.state.MaxCount && this.state.Count !=0;
+    var isValid = this.state.Count <= this.state.MaxCount && this.state.Count != 0;
+    var date = new Date(this.state.VisitDate).getDate() > 9 ? new Date(this.state.VisitDate).getDate() : "0" + new Date(this.state.VisitDate).getDate()
+    var month = new Date(this.state.VisitDate).getMonth() > 9 ? new Date(this.state.VisitDate).getMonth() : "0" + new Date(this.state.VisitDate).getMonth()
     if(isValid)
     {
     axios.post('/drugmanage/visit',{
-            VisitDate: new Date(this.state.VisitDate).toLocaleDateString(),
+            VisitDate: date + "." + month + "." + new Date(this.state.VisitDate).getFullYear(),
             PatientId: this.props.match.params.id,
             DrugAtClinicId: this.state.DrugData[this.state.DrugIndex].rowId,
             Count: this.state.Count
